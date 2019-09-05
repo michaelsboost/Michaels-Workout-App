@@ -4,27 +4,27 @@ var counter = 1, chosenDifficulty, chosenWorkoutType, runTimer,
   audioElement     = document.createElement("audio"),
   audioElement2    = document.createElement("audio"),
   goSound          = function() {
-    audioElement.setAttribute("src", "./media/go.mp3");
+    audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/go.mp3");
     audioElement.play();
   },
   breakSound       = function() {
-    audioElement.setAttribute("src", "./media/break.mp3");
+    audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/break.mp3");
     audioElement.play();
   },
   errorSound       = function() {
-    audioElement.setAttribute("src", "./media/error.mp3");
+    audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/error.mp3");
     audioElement.play();
   },
   abortSound       = function() {
-    audioElement.setAttribute("src", "./media/abort.mp3");
+    audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/abort.mp3");
     audioElement.play();
   },
   retreatSound     = function() {
-    audioElement.setAttribute("src", "./media/retreat.mp3");
+    audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/retreat.mp3");
     audioElement.play();
   },
   finishedSound    = function() {
-    audioElement.setAttribute("src", "./media/complete.mp3");
+    audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/complete.mp3");
     audioElement.play();
   };
 

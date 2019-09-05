@@ -120,6 +120,10 @@ $("#repspermin, #howmanyhours").on("keyup change", function() {
 
 // Start/Stop The Workout
 function startWorkout() {
+  var ahora = new Date();
+  tiempo = ahora.toLocaleTimeString();
+  $("[data-output=starttime]").text(tiempo);
+  
   runTimer = setInterval(function() {
     $("[data-count=minutes]").text(counter++);
     $("[data-count=reps]").text(parseInt($("#repspermin").val() * counter));

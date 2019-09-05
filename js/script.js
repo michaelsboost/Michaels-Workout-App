@@ -123,6 +123,7 @@ function startWorkout() {
   var ahora = new Date();
   tiempo = ahora.toLocaleTimeString();
   $("[data-output=starttime]").text(tiempo);
+  $("[data-output=repspermin]").text(repspermin.value);
   
   runTimer = setInterval(function() {
     $("[data-count=minutes]").text(counter++);
@@ -197,8 +198,8 @@ function doBounce(element, times, distance, speed) {
 }
 
 // Auto Select
-//$("[data-display=typeofworkout] #pullups").prop("checked", true).trigger("click");
-//$("[data-confirm=typeofworkout]").trigger("click");
-//$("#repspermin").val("4");
-//$("#howmanyhours").val("1").trigger("change");
-//$("[data-confirm=workoutparameters]").trigger("click");
+$("[data-display=typeofworkout] #pullups").prop("checked", true).trigger("click");
+$("[data-confirm=typeofworkout]").trigger("click");
+$("#repspermin").val("4");
+$("#howmanyhours").val("1").trigger("change");
+$("[data-confirm=workoutparameters]").trigger("click");

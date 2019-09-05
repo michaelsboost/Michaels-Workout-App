@@ -159,12 +159,21 @@
                 <h1 class="center headline-primary--grouped">
                   <span data-countdown="reps">?</span> <span data-output="workouttype" style="text-transform: capitalize;"></span> left
                 </h1>
+                <h1 class="center headline-primary--grouped">
+                  Times Paused: <span data-output="paused">0</span>
+                </h1>
+                <h1 class="center hide headline-primary--grouped" data-display="finish">
+                  Finished at: <span data-output="finish">?</span>
+                </h1>
               </p>
               
-              <button class="hide btn--info fill" data-confirm="newworkout">
+              <button class="hide btn--info fill" data-confirm="newworkout" style="margin-left: 0;">
                 New Workout
               </button>
-              <button class="btn--error fill" data-confirm="stopworkout">
+              <button class="btn--info fill" data-confirm="pauseworkout" style="margin-left: 0;">
+                Pause Workout
+              </button>
+              <button class="btn--error fill" data-confirm="stopworkout" style="margin-left: 0;">
                 Stop Workout
               </button>
             </div>

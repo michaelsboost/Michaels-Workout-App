@@ -1,32 +1,34 @@
 // Variables
-var counter = 1, chosenDifficulty, chosenWorkoutType, runTimer,
-  pullupspermin, totalhours, time, currentH, currentM, randomNum, randomNumber,
-  audioElement     = document.createElement("audio"),
-  audioElement2    = document.createElement("audio"),
-  goSound          = function() {
-    audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/go.mp3");
-    audioElement.play();
-  },
-  breakSound       = function() {
-    audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/break.mp3");
-    audioElement.play();
-  },
-  errorSound       = function() {
-    audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/error.mp3");
-    audioElement.play();
-  },
-  abortSound       = function() {
-    audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/abort.mp3");
-    audioElement.play();
-  },
-  retreatSound     = function() {
-    audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/retreat.mp3");
-    audioElement.play();
-  },
-  finishedSound    = function() {
-    audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/complete.mp3");
-    audioElement.play();
-  };
+var counter = 1, countPause = 1, chosenDifficulty,
+    chosenWorkoutType, runTimer, pullupspermin,
+    totalhours, now, ahora, time, tiempo, currentH,
+    currentM, randomNum, randomNumber,
+    audioElement     = document.createElement("audio"),
+    audioElement2    = document.createElement("audio"),
+    goSound          = function() {
+      audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/go.mp3");
+      audioElement.play();
+    },
+    breakSound       = function() {
+      audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/break.mp3");
+      audioElement.play();
+    },
+    errorSound       = function() {
+      audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/error.mp3");
+      audioElement.play();
+    },
+    abortSound       = function() {
+      audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/abort.mp3");
+      audioElement.play();
+    },
+    retreatSound     = function() {
+      audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/retreat.mp3");
+      audioElement.play();
+    },
+    finishedSound    = function() {
+      audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/complete.mp3");
+      audioElement.play();
+    };
 
 // Disclaimer
 $("[data-action=disclaimer]").click(function() {
@@ -78,24 +80,6 @@ $("[data-confirm=typeofworkout]").click(function() {
   }
 });
 
-// Workout Finished Initiate New Workout
-$("[data-confirm=newworkout]").click(function() {
-//  location.reload(true);
-
-  // Reset text
-  counter = 0;
-  totalhours    = $("#howmanyhours").val();
-  pullupspermin = $("#repspermin").val();
-  $("[data-count=reps]").text(pullupspermin);
-  $("[data-countdown=reps]").text(totalhours * 60 * pullupspermin);
-  $("[data-count=minutes]").text("0");
-
-  // Allow user to reset inputs
-  $("[data-action=randomize]").fadeIn(250);
-  $("[data-display=typeofworkout]").fadeIn(250);
-  $("[data-display=startworkout]").fadeOut(250);
-});
-
 // Calculate How Many Hours
 $("#repspermin, #howmanyhours").on("keyup change", function() {
   // 4 pullups every min for 2 hours how many pullups?
@@ -120,7 +104,7 @@ $("#repspermin, #howmanyhours").on("keyup change", function() {
 
 // Start/Stop The Workout
 function startWorkout() {
-  var ahora = new Date();
+  ahora = new Date();
   tiempo = ahora.toLocaleTimeString();
   $("[data-output=starttime]").text(tiempo);
   $("[data-output=repspermin]").text(repspermin.value);
@@ -137,8 +121,9 @@ function startWorkout() {
     goSound();
 
     if ($("[data-countdown=reps]").text() === "0") {
-      $("[data-confirm=newworkout]").removeClass("hide");
-      $("[data-confirm=stopworkout]").addClass("hide");
+      $("[data-display=finish], [data-confirm=newworkout]").removeClass("hide");
+      $("[data-confirm=stopworkout], [data-confirm=pauseworkout]").addClass("hide");
+      $("[data-output=finish]").text(time);
       clearTimeout(runTimer);
       finishedSound();
     }
@@ -152,7 +137,7 @@ function abortWorkout() {
 
 // Define a function to display the current time
 function displayTime() {
-  var now = new Date();
+  now = new Date();
   time = now.toLocaleTimeString();
   clock.textContent = time;
   setTimeout(displayTime, 1000);
@@ -185,9 +170,65 @@ $("[data-confirm=stopworkout]").click(function() {
     confirmButtonText: 'Yes, Quit Workout!'
   }).then(function() {
     abortWorkout();
-    $("[data-display=workoutparameters]").fadeIn(250);
+    
+    // Reset text
+    counter = 0;
+    countPause = 0;
+    totalhours    = $("#howmanyhours").val();
+    pullupspermin = $("#repspermin").val();
+    $("[data-count=reps]").text(pullupspermin);
+    $("[data-countdown=reps]").text(totalhours * 60 * pullupspermin);
+    $("[data-count=minutes], [data-output=paused]").text("0");
+
+    // Allow user to reset inputs
+    $("[data-action=randomize]").fadeIn(250);
+    $("[data-display=typeofworkout]").fadeIn(250);
     $("[data-display=startworkout]").fadeOut(250);
-  })
+    $("[data-confirm=pauseworkout]").removeClass("hide");
+    $("[data-confirm=stopworkout]").removeClass("hide");
+    $("[data-confirm=newworkout]").addClass("hide");
+    $("[data-display=finish]").addClass("hide");
+  });
+});
+
+// Pause Workout
+$("[data-confirm=pauseworkout]").click(function() {
+  if ($("[data-confirm=stopworkout]").is(":visible")) {
+    this.textContent = "Start Workout";
+    $("[data-confirm=stopworkout]").addClass("hide");
+    clearTimeout(runTimer);
+    runTimer = 0;
+    breakSound();
+    $("[data-output=paused]").text(countPause++);
+  } else {
+    this.textContent = "Pause Workout";
+    $("[data-confirm=stopworkout]").removeClass("hide");
+    runTimer = 0;
+    startWorkout();
+  }
+});
+
+// Workout Finished Initiate New Workout
+$("[data-confirm=newworkout]").click(function() {
+//  location.reload(true);
+
+  // Reset text
+  counter = 0;
+  countPause = 0;
+  totalhours    = $("#howmanyhours").val();
+  pullupspermin = $("#repspermin").val();
+  $("[data-count=reps]").text(pullupspermin);
+  $("[data-countdown=reps]").text(totalhours * 60 * pullupspermin);
+  $("[data-count=minutes], [data-output=paused]").text("0");
+
+  // Allow user to reset inputs
+  $("[data-action=randomize]").fadeIn(250);
+  $("[data-display=typeofworkout]").fadeIn(250);
+  $("[data-display=startworkout]").fadeOut(250);
+  $("[data-confirm=pauseworkout]").removeClass("hide");
+  $("[data-confirm=stopworkout]").removeClass("hide");
+  $("[data-confirm=newworkout]").addClass("hide");
+  $("[data-display=finish]").addClass("hide");
 });
 
 // Animate button on click
@@ -203,8 +244,8 @@ function doBounce(element, times, distance, speed) {
 }
 
 // Auto Select
-$("[data-display=typeofworkout] #pullups").prop("checked", true).trigger("click");
-$("[data-confirm=typeofworkout]").trigger("click");
-$("#repspermin").val("4");
-$("#howmanyhours").val("1").trigger("change");
-$("[data-confirm=workoutparameters]").trigger("click");
+//$("[data-display=typeofworkout] #pushups").prop("checked", true).trigger("click");
+//$("[data-confirm=typeofworkout]").trigger("click");
+//$("#repspermin").val("17");
+//$("#howmanyhours").val("1").trigger("change");
+//$("[data-confirm=workoutparameters]").trigger("click");

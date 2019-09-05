@@ -5,8 +5,8 @@ var counter = 1, chosenDifficulty, chosenWorkoutType, runTimer,
   audioElement2    = document.createElement("audio"),
   goSound          = function() {
     if (window.location.toString().split(/\?|#/)[0] === "http://michaelsboost.github.io/Michaels-Workout-App/" || window.location.toString().split(/\?|#/)[0] === "http://michaelsboost.com/Michaels-Workout-App/") {
-      audioElement.setAttribute("src", "http://michaelsboost.com/Michaels-Workout-App/media/go.mp3");
-      audioElement.play();
+      console.log(audioElement.setAttribute("src", "./media/go.mp3"));
+      console.log(audioElement.play());
     } else {
       audioElement.setAttribute("src", "../media/go.mp3");
       audioElement.play();
@@ -14,8 +14,8 @@ var counter = 1, chosenDifficulty, chosenWorkoutType, runTimer,
   },
   breakSound       = function() {
     if (window.location.toString().split(/\?|#/)[0] === "http://michaelsboost.github.io/Michaels-Workout-App/" || window.location.toString().split(/\?|#/)[0] === "http://michaelsboost.com/Michaels-Workout-App/") {
-      audioElement.setAttribute("src", "http://michaelsboost.com/Michaels-Workout-App/media/break.mp3");
-      audioElement.play();
+      console.log(audioElement.setAttribute("src", "./media/break.mp3"));
+      console.log(audioElement.play());
     } else {
       audioElement.setAttribute("src", "../media/break.mp3");
       audioElement.play();
@@ -23,8 +23,8 @@ var counter = 1, chosenDifficulty, chosenWorkoutType, runTimer,
   },
   errorSound       = function() {
     if (window.location.toString().split(/\?|#/)[0] === "http://michaelsboost.github.io/Michaels-Workout-App/" || window.location.toString().split(/\?|#/)[0] === "http://michaelsboost.com/Michaels-Workout-App/") {
-      audioElement.setAttribute("src", "http://michaelsboost.com/Michaels-Workout-App/media/error.mp3");
-      audioElement.play();
+      console.log(audioElement.setAttribute("src", "./media/error.mp3"));
+      console.log(audioElement.play());
     } else {
       audioElement.setAttribute("src", "../media/error.mp3");
       audioElement.play();
@@ -32,8 +32,8 @@ var counter = 1, chosenDifficulty, chosenWorkoutType, runTimer,
   },
   abortSound       = function() {
     if (window.location.toString().split(/\?|#/)[0] === "http://michaelsboost.github.io/Michaels-Workout-App/" || window.location.toString().split(/\?|#/)[0] === "http://michaelsboost.com/Michaels-Workout-App/") {
-      audioElement.setAttribute("src", "http://michaelsboost.com/Michaels-Workout-App/media/abort.mp3");
-      audioElement.play();
+      console.log(audioElement.setAttribute("src", "./media/abort.mp3"));
+      console.log(audioElement.play());
     } else {
       audioElement.setAttribute("src", "../media/abort.mp3");
       audioElement.play();
@@ -41,8 +41,8 @@ var counter = 1, chosenDifficulty, chosenWorkoutType, runTimer,
   },
   retreatSound     = function() {
     if (window.location.toString().split(/\?|#/)[0] === "http://michaelsboost.github.io/Michaels-Workout-App/" || window.location.toString().split(/\?|#/)[0] === "http://michaelsboost.com/Michaels-Workout-App/") {
-      audioElement.setAttribute("src", "http://michaelsboost.com/Michaels-Workout-App/media/retreat.mp3");
-      audioElement.play();
+      console.log(audioElement.setAttribute("src", "./media/retreat.mp3"));
+      console.log(audioElement.play());
     } else {
       audioElement.setAttribute("src", "../media/retreat.mp3");
       audioElement.play();
@@ -50,8 +50,8 @@ var counter = 1, chosenDifficulty, chosenWorkoutType, runTimer,
   },
   finishedSound    = function() {
     if (window.location.toString().split(/\?|#/)[0] === "http://michaelsboost.github.io/Michaels-Workout-App/" || window.location.toString().split(/\?|#/)[0] === "http://michaelsboost.com/Michaels-Workout-App/") {
-      audioElement.setAttribute("src", "http://michaelsboost.com/Michaels-Workout-App/media/complete.mp3");
-      audioElement.play();
+      console.log(audioElement.setAttribute("src", "./media/complete.mp3"));
+      console.log(audioElement.play());
     } else {
       audioElement.setAttribute("src", "../media/complete.mp3");
       audioElement.play();

@@ -5,7 +5,7 @@ var counter = 1, chosenDifficulty, chosenWorkoutType, runTimer,
   audioElement2    = document.createElement("audio"),
   goSound          = function() {
     if (window.location.toString().split(/\?|#/)[0] === "http://michaelsboost.github.io/Michaels-Workout-App/" || window.location.toString().split(/\?|#/)[0] === "http://michaelsboost.com/Michaels-Workout-App/") {
-      audioElement.setAttribute("src", "./media/go.mp3");
+      audioElement.setAttribute("src", window.location.toString().split(/\?|#/)[0] + "/media/go.mp3");
       audioElement.play();
     } else {
       audioElement.setAttribute("src", "../media/go.mp3");

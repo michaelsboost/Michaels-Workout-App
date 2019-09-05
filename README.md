@@ -3,9 +3,21 @@ Michael's Workout App
 
 A new way to challenge yourself in the gym!
 
+
+Select Your Workout!
+-------------
+
 ![](https://raw.githubusercontent.com/michaelsboost/Michaels-Workout-App/gh-pages/screenshot1.png)
+
+Input Your Parameters!
+-------------
+
 ![](https://raw.githubusercontent.com/michaelsboost/Michaels-Workout-App/gh-pages/screenshot2.png)
 ![](https://raw.githubusercontent.com/michaelsboost/Michaels-Workout-App/gh-pages/screenshot3.png)
+
+Then Execute!
+-------------
+
 ![](https://raw.githubusercontent.com/michaelsboost/Michaels-Workout-App/gh-pages/screenshot4.png)
 ![](https://raw.githubusercontent.com/michaelsboost/Michaels-Workout-App/gh-pages/screenshot5.png)
 

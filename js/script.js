@@ -124,6 +124,11 @@ function startWorkout() {
   tiempo = ahora.toLocaleTimeString();
   $("[data-output=starttime]").text(tiempo);
   $("[data-output=repspermin]").text(repspermin.value);
+  if (howmanyhours.value === "1") {
+    $("[data-output=howmanyhours]").text(howmanyhours.value + " hour");
+  } else {
+    $("[data-output=howmanyhours]").text(howmanyhours.value + " hours");
+  }
   
   runTimer = setInterval(function() {
     $("[data-count=minutes]").text(counter++);

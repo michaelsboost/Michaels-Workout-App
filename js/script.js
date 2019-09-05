@@ -4,7 +4,7 @@ var counter = 1, chosenDifficulty, chosenWorkoutType, runTimer,
   audioElement     = document.createElement("audio"),
   audioElement2    = document.createElement("audio"),
   goSound          = function() {
-    if (window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.github.io/Skate-Roulette/game/randomskate.html" || window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.github.io/Skate-Roulette/game/skateroulette.html") {
+    if (window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.github.io/Michaels-Workout-App" || window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.com/Michaels-Workout-App") {
       audioElement.setAttribute("src", "../media/go.mp3");
       audioElement.play();
     } else {
@@ -13,7 +13,7 @@ var counter = 1, chosenDifficulty, chosenWorkoutType, runTimer,
     }
   },
   breakSound       = function() {
-    if (window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.github.io/Skate-Roulette/game/randomskate.html" || window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.github.io/Skate-Roulette/game/skateroulette.html") {
+    if (window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.github.io/Michaels-Workout-App" || window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.com/Michaels-Workout-App") {
       audioElement.setAttribute("src", "../media/break.mp3");
       audioElement.play();
     } else {
@@ -22,7 +22,7 @@ var counter = 1, chosenDifficulty, chosenWorkoutType, runTimer,
     }
   },
   errorSound       = function() {
-    if (window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.github.io/Skate-Roulette/game/randomskate.html" || window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.github.io/Skate-Roulette/game/skateroulette.html") {
+    if (window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.github.io/Michaels-Workout-App" || window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.com/Michaels-Workout-App") {
       audioElement.setAttribute("src", "../media/error.mp3");
       audioElement.play();
     } else {
@@ -31,7 +31,7 @@ var counter = 1, chosenDifficulty, chosenWorkoutType, runTimer,
     }
   },
   abortSound       = function() {
-    if (window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.github.io/Skate-Roulette/game/randomskate.html" || window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.github.io/Skate-Roulette/game/skateroulette.html") {
+    if (window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.github.io/Michaels-Workout-App" || window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.com/Michaels-Workout-App") {
       audioElement.setAttribute("src", "../media/abort.mp3");
       audioElement.play();
     } else {
@@ -40,7 +40,7 @@ var counter = 1, chosenDifficulty, chosenWorkoutType, runTimer,
     }
   },
   retreatSound     = function() {
-    if (window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.github.io/Skate-Roulette/game/randomskate.html" || window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.github.io/Skate-Roulette/game/skateroulette.html") {
+    if (window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.github.io/Michaels-Workout-App" || window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.com/Michaels-Workout-App") {
       audioElement.setAttribute("src", "../media/retreat.mp3");
       audioElement.play();
     } else {
@@ -49,7 +49,7 @@ var counter = 1, chosenDifficulty, chosenWorkoutType, runTimer,
     }
   },
   finishedSound    = function() {
-    if (window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.github.io/Skate-Roulette/game/randomskate.html" || window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.github.io/Skate-Roulette/game/skateroulette.html") {
+    if (window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.github.io/Michaels-Workout-App" || window.location.toString().split(/\?|#/)[0] === "https://michaelsboost.com/Michaels-Workout-App") {
       audioElement.setAttribute("src", "../media/complete.mp3");
       audioElement.play();
     } else {

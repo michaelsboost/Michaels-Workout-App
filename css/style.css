@@ -1,0 +1,168 @@
+@import url("../libraries/alertifyjs/css/alertify.core.css");
+@import url("../libraries/alertifyjs/css/alertify.default.css");
+@font-face {
+  font-family: HeitiUI;
+  src: url("../libraries/font-awesome/STHeiti.ttc");
+}
+
+/* Globals */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  text-align: center;
+  background: #f8ffe6;
+/*  background: rgba(248, 255, 230, 0.8);*/
+  overflow: auto;
+}
+
+/* Main */
+.disclaimer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 16px;
+}
+.randomize {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 16px;
+}
+.clock {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 4em;
+}
+
+/* Center vertically and horizontally */
+.table {
+  display: table;
+  width: 100%;
+  height: calc(100% - 87px);
+  margin-top: 20px;
+}
+.cell {
+  display: table-cell;
+  vertical-align: middle;
+  height: 100%;
+}
+
+/* Difficulty */
+.selectdropdowns ul li {
+/*  color: #5a8194;*/
+  color: #666;
+/*  border-bottom: 1px solid #5a8194;*/
+  border-bottom: 1px solid #43c787;
+}
+.confirmdropdown {
+/*  background: #5a8194;*/
+  background: #43c787;
+}
+.selectdropdowns ul li .check {
+/*  border: 5px solid #5a8194;*/
+  border: 5px solid #43c787;
+}
+.selectdropdowns ul li {
+  display: block;
+  position: relative;
+  float: left;
+  width: 100%;
+  height: 100px;
+}
+.selectdropdowns ul li input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+}
+.selectdropdowns ul li input[type=text],
+.selectdropdowns ul li input[type=number] {
+  display: block;
+  position: relative;
+  padding: 30px 80px;
+}
+.selectdropdowns ul li label {
+  cursor: pointer;
+  display: block;
+  position: relative;
+  padding: 30px 80px;
+  text-transform: capitalize;
+  -webkit-transition: all 0.25s linear;
+}
+.selectdropdowns ul li .check {
+  position: absolute;
+  border-radius: 100%;
+  height: 30px;
+  width: 30px;
+  top: 30px;
+  left: 20px;
+  transition: border .25s linear;
+  -webkit-transition: border .25s linear;
+}
+.selectdropdowns ul li .check::before {
+  position: absolute;
+  content: '';
+  border-radius: 100%;
+  height: 10px;
+  width: 10px;
+  margin: 5px;
+  transition: background 0.25s linear;
+  -webkit-transition: background 0.25s linear;
+  transform: scale(1.3);
+}
+
+.selectdropdowns input[type=radio]:checked ~ .check {
+  border: 5px solid #937ad6;
+}
+.selectdropdowns input[type=radio]:checked ~ .check::before {
+  background: #937ad6;
+}
+.selectdropdowns input[type=radio]:checked ~ label {
+  color: #937ad6;
+}
+
+.selectdropdowns ul li:hover label {
+  color: #aba3ff;
+}
+.selectdropdowns ul li:hover .check {
+  border: 5px solid #aba3ff;
+}
+
+/* Misc */
+.hide {
+  display: none;
+}
+.invisible {
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+.pointer {
+  cursor: pointer;
+}
+.block {
+  display: block;
+}
+.ib {
+  display: inline-block;
+}
+.fill {
+  width: 100%;
+}
+.tc, .center {
+  text-align: center;
+}
+.tl {
+  text-align: left;
+}
+.fl {
+  float: left;
+}
+.fn {
+  float: none;
+}
+.fr {
+  float: right;
+}

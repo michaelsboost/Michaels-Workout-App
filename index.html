@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Michael's Workout App</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta name="description" content="A new way to challenge yourself in the gym!">
+    <meta name="author" content="Michael Schwartz">
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <script src="libraries/jquery/jquery.js"></script>
+    <script src="libraries/jquery/jquery-migrate-1.2.1.min.js"></script>
+    <link rel="stylesheet" href="libraries/normalize/normalize.css" />
+    <link rel="stylesheet" href="libraries/polyui/polyui.css">
+    <link rel="stylesheet" href="libraries/font-awesome/font-awesome.css" />
+    <link rel="stylesheet" href="libraries/font-awesome/macset.css" />
+    <link rel="stylesheet" href="libraries/sweetalert2/sweetalert2.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Disclaimer -->
+    <h1 class="pointer headline-primary--grouped disclaimer" data-action="disclaimer">
+      <i class="fa fa-exclamation-circle"></i>
+    </h1>
+    
+    <!-- Give me a Random Challenge -->
+    <h1 class="pointer headline-primary--grouped randomize" data-action="randomize">
+      <i class="fa fa-refresh"></i>
+    </h1>
+    
+    <!-- Centered Game Area -->
+    <div class="table">
+      <div class="cell">
+        <div class="grid" data-display="grid">
+          <div class="centered grid__col--9">
+
+            <!-- Type of Workout -->
+            <div class="selectdropdowns typeofworkout" data-display="typeofworkout">
+              <h1 class="center headline-primary--grouped">
+                Select your type of workout...
+              </h1>
+              <ul class="headline-secondary--grouped">
+                <li>
+                  <input type="radio" id="pullups" name="workoutGroup">
+                  <label for="pullups">pullups</label>
+
+                  <div class="check"></div>
+                </li>
+                <li>
+                  <input type="radio" id="chinups" name="workoutGroup">
+                  <label for="chinups">chinups</label>
+
+                  <div class="check"></div>
+                </li>
+                <li>
+                  <input type="radio" id="pushups" name="workoutGroup">
+                  <label for="pushups">pushups</label>
+
+                  <div class="check"></div>
+                </li>
+                <li>
+                  <input type="radio" id="situps" name="workoutGroup">
+                  <label for="situps">situps</label>
+
+                  <div class="check"></div>
+                </li>
+                <li>
+                  <input type="radio" id="muscleups" name="workoutGroup">
+                  <label for="muscleups">muscle ups</label>
+
+                  <div class="check"></div>
+                </li>
+                <li>
+                  <input type="radio" id="burpees" name="workoutGroup">
+                  <label for="burpees">burpees</label>
+
+                  <div class="check"></div>
+                </li>
+                <li>
+                  <input type="radio" id="benchdips" name="workoutGroup">
+                  <label for="benchdips">bench dips</label>
+
+                  <div class="check"><div class="inside"></div></div>
+                </li>
+                <li>
+                  <input type="radio" id="squats" name="workoutGroup">
+                  <label for="squats">squats</label>
+
+                  <div class="check"></div>
+                </li>
+                <li>
+                  <input type="radio" id="lunges" name="workoutGroup">
+                  <label for="lunges">lunges</label>
+
+                  <div class="check"></div>
+                </li>
+                <li>
+                  <input type="radio" id="boxjumps" name="workoutGroup">
+                  <label for="boxjumps">box jumps</label>
+
+                  <div class="check"></div>
+                </li>
+              </ul>
+              
+              <button class="btn--info confirmdropdown fill" data-confirm="typeofworkout">
+                Confirm
+              </button>
+            </div>
+            
+            <!-- Workout Parameters -->
+            <div class="hide selectdropdowns workoutparameters" data-display="workoutparameters">
+              <h1 class="center headline-primary--grouped">
+                Input workout parameters...
+              </h1>
+              <ul class="headline-secondary--grouped">
+                <li>
+                  <input type="number" id="repspermin" name="workoutparameters" placeholder="Reps per minute" min="1" step="1" max="1440">
+                </li>
+                <li>
+                  <input type="number" id="howmanyhours" name="workoutparameters" placeholder="How many hours?" min="1" max="24" step="1">
+                </li>
+                <li style="border: 0;">
+                  <label class="tc">
+                    Total <span data-calculate="reps">?</span> <span data-output="workouttype"></span>
+                  </label>
+                </li>
+              </ul>
+              
+              <button class="btn--info hide confirmdropdown fill" data-confirm="workoutparameters">
+                Confirm
+              </button>
+              <button class="btn--error fill" data-confirm="backtoworkout" style="margin-left: 0;">
+                Back
+              </button>
+            </div>
+            
+            <!-- Start Workout -->
+            <div class="hide selectdropdowns startworkout" data-display="startworkout">
+              <h1 class="center headline-primary--grouped clock" id="clock">
+                Total <span data-count="reps">?</span> <span data-output="workouttype" style="text-transform: capitalize;"></span>
+              </h1>
+                
+              <p>
+                <h1 class="center headline-primary--grouped">
+                  Total <span data-count="reps">?</span> <span data-output="workouttype" style="text-transform: capitalize;"></span>
+                </h1>
+                <h1 class="center headline-primary--grouped">
+                  <span data-count="minutes">?</span> Minutes have gone by
+                </h1>
+                <h1 class="center headline-primary--grouped">
+                  <span data-countdown="reps">?</span> <span data-output="workouttype" style="text-transform: capitalize;"></span> left
+                </h1>
+              </p>
+              
+              <button class="hide btn--info fill" data-confirm="newworkout">
+                New Workout
+              </button>
+              <button class="btn--error fill" data-confirm="stopworkout">
+                Stop Workout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="libraries/alertifyjs/alertify.min.js"></script>
+    <script src="libraries/sweetalert2/sweetalert2.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

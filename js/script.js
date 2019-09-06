@@ -61,7 +61,7 @@ var counter = 1, countPause = 1, chosenDifficulty,
       $("[data-display=finish]").addClass("hide");
       return false;
     },
-    scrollToView = function(el) {
+    scrollToView    = function(el) {
       el.scrollintoview({
         duration: "fast",
         direction: "vertical",

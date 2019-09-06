@@ -104,8 +104,6 @@ $("[data-action=randomize]").click(function() {
 });
 
 // Global window hotkeys
-// down arrow = 40
-// up arrow = 38
 window.onkeydown = function(e) {
   // Use enter key to confirm type of workout
   if ($("[data-display=typeofworkout]").is(":visible")) {
@@ -190,6 +188,9 @@ shortcut.add("down", function() {
       scrollToView($("[data-display=typeofworkout] input:checked").parent());
     }
   }
+  return false;
+}, {
+  "disable_in_input": true
 });
 shortcut.add("right", function() {
   if ($("[data-display=typeofworkout]").is(":visible")) {
@@ -213,6 +214,9 @@ shortcut.add("right", function() {
       scrollToView($("[data-display=typeofworkout] input:checked").parent());
     }
   }
+  return false;
+}, {
+  "disable_in_input": true
 });
 shortcut.add("up", function() {
   if ($("[data-display=typeofworkout]").is(":visible")) {
@@ -236,6 +240,9 @@ shortcut.add("up", function() {
       scrollToView($("[data-display=typeofworkout] input:checked").parent());
     }
   }
+  return false;
+}, {
+  "disable_in_input": true
 });
 shortcut.add("left", function() {
   if ($("[data-display=typeofworkout]").is(":visible")) {
@@ -259,6 +266,9 @@ shortcut.add("left", function() {
       scrollToView($("[data-display=typeofworkout] input:checked").parent());
     }
   }
+  return false;
+}, {
+  "disable_in_input": true
 });
 
 // Save workout log hotkey
@@ -284,15 +294,33 @@ shortcut.add("ctrl+n", function() {
 $("[data-confirm=backtoworkout]").click(function() {
   $("[data-display=workoutparameters]").fadeOut(250);
   $("[data-display=typeofworkout]").fadeIn(250);
+  
+  // Remove input focus
+  if ($("#repspermin").is(":focus")) {
+    repspermin.blur();
+  } else {
+    if ($("#howmanyhours").is(":focus")) {
+      howmanyhours.blur();
+    }
+  }
 });
 
 // Confirm Type of Workout
-$("[data-confirm=typeofworkout]").click(function() {
+$("[data-confirm=typeofworkout]").click(function(e) {
   if ( !$("input[name=workoutGroup]").is(":checked") ) {
     alertify.error("No type of workout selected");
   } else {
     $("[data-display=typeofworkout]").fadeOut(250);
     $("[data-display=workoutparameters]").fadeIn(250);
+    
+    // check if repspermin or howmanyhours already has a value for focus
+    if (!repspermin.value) {
+      repspermin.focus();
+    } else if (!howmanyhours.value) {
+      howmanyhours.focus();
+    } else {
+      repspermin.focus();
+    }
     
     chosenWorkoutType = $("[data-display=typeofworkout] input:checked").attr("id");
     selectedWorkoutType = $("[data-display=typeofworkout] label[for="+ chosenWorkoutType +"]").text()
@@ -327,6 +355,22 @@ $("#repspermin, #howmanyhours").on("keyup change", function() {
   if (e.which === 27) {
     $("[data-confirm=backtoworkout]").trigger("click");
   }
+  
+  // Only if repspermin has value focus on howmanyhours
+  if (repspermin.value && !howmanyhours.value) {
+    if (e.which === 13) {
+      howmanyhours.focus();
+    }
+  }
+  
+  // Only if howmanyhours has value focus on repspermin
+  if (!repspermin.value && howmanyhours.value) {
+    if (e.which === 13) {
+      repspermin.focus();
+    }
+  }
+  
+  // if both have a valye confirm parameters via enter key
   if (repspermin.value && howmanyhours.value) {
     if (e.which === 13) {
       $("[data-confirm=workoutparameters]").trigger("click");

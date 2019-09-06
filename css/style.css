@@ -45,7 +45,7 @@ html, body {
   height: 100%;
 }
 
-/* Difficulty */
+/* Workout Type */
 .selectdropdowns ul li {
   color: #666;
   border-bottom: 1px solid #43c787;
@@ -73,13 +73,19 @@ html, body {
   position: relative;
   padding: 30px 80px;
 }
-.selectdropdowns ul li label {
+.selectdropdowns ul li label,
+.selectdropdowns ul li a {
   cursor: pointer;
   display: block;
   position: relative;
-  padding: 30px 80px;
   text-transform: capitalize;
   -webkit-transition: all 0.25s linear;
+}
+.selectdropdowns ul li label {
+  padding: 30px 80px;
+}
+.selectdropdowns ul li a {
+  padding: 30px 0;
 }
 .selectdropdowns ul li .check {
   position: absolute;
@@ -116,8 +122,16 @@ html, body {
 .selectdropdowns ul li:hover label {
   color: #aba3ff;
 }
+.selectdropdowns ul li a:hover {
+  color: #73a9b7;
+}
 .selectdropdowns ul li:hover .check {
   border: 5px solid #aba3ff;
+}
+
+/* Hide play button temporarily until videos are released */
+.selectdropdowns ul li a[data-lity] {
+  display: none;
 }
 
 /* Misc */

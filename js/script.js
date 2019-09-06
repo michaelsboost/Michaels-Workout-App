@@ -129,7 +129,16 @@ $("#repspermin, #howmanyhours").on("keyup change", function() {
     $("[data-confirm=workoutparameters]").hide();
   }
   
-  $("[data-count=minutesleft]").text("59 minutes ");
+  $("[data-count=minutesleft]").text($("#howmanyhours").val() * 60 - 1 + " minutes");
+});
+
+// Start workout by pressing enter key on workout parameters (if has a value)
+$("#repspermin, #howmanyhours").on("keydown", function(e) {
+  if ($("#repspermin").val() && $("#howmanyhours").val()) {
+    if (e.which === 13) {
+      $("[data-confirm=workoutparameters]").trigger("click");
+    }
+  }
 });
 
 // Start/Stop The Workout
@@ -138,7 +147,7 @@ function startWorkout() {
   tiempo = ahora.toLocaleTimeString();
   $("[data-output=starttime]").text(tiempo);
   $("[data-output=repspermin]").text(repspermin.value);
-  if (howmanyhours.value === "1") {
+  if (howmanyhours.value <= "1") {
     $("[data-output=howmanyhours]").text(howmanyhours.value + " hour");
   } else {
     $("[data-output=howmanyhours]").text(howmanyhours.value + " hours");
@@ -158,9 +167,9 @@ function startWorkout() {
     
     // Display minutes left
     if (minsLeft === "58") {
-      $("[data-count=minutesleft]").text(59 - minsLeft + " minute");
+      $("[data-count=minutesleft]").text($("#howmanyhours").val() * 60 - 1 - minsLeft + " minute");
     } else {
-      $("[data-count=minutesleft]").text(59 - minsLeft + " minutes");
+      $("[data-count=minutesleft]").text($("#howmanyhours").val() * 60 - 1 - minsLeft + " minutes");
     }
     
     // Count how many reps

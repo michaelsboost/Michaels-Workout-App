@@ -48,7 +48,7 @@ Want to contribute? Great!
 
 Michael's Workout App is no longer an active project however you can submit a pull request or simply share the project :)
 
-*As of September 5th, 2019 Michael's Workout App is no longer an active project.
+*As of September 6th, 2019 Michael's Workout App is no longer an active project.
 All updates as of that date and on are solely contributor based implementations.*
 
 Of course the app is free and open source, so you can always fork the project and have fun :)

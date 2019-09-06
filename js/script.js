@@ -303,7 +303,7 @@ $("[data-confirm=newworkout]").click(function() {
   }
 });
 
-// Workout Finished Initiate New Workout
+// Save Workout Log
 $("[data-save=workoutlog]").click(function() {
   // User is saving workout log
   // Updating variable so user isn't prompted upon new workout
@@ -313,7 +313,7 @@ $("[data-save=workoutlog]").click(function() {
   saveDate = today.getMonth() + 1 + "_" + today.getDate() + "_" + today.getFullYear();
   dateTime = saveDate + " " + $("[data-output=finish]").text();
   
-  workoutLog = $("[data-content=workoutlog]").text().trim().replace(/[\s]/g," ").replace(/\s{2,}/gm,"\n").toString();
+  workoutLog = $("[data-content=workoutlog]").text().trim().replace(/\s{2,}/gm,"\n").toString();
   blob = new Blob([ workoutLog ], {type: "text/plain"});
   saveAs(blob, "workout_log " + dateTime + ".txt");
 });

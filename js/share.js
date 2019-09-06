@@ -1,6 +1,12 @@
 // Variables
 var str, startTime,
-    testString = "Date: 9:6:2019\nStart time: 3:10:57 PM\nObjective: 17 pushups a minute for 1 hour\nGoal: 1020 pushups in 1 hour\nCompleted: 1020 pushups\n60 minutes have gone by\n0 pushups remaining\n0 minutes remaining\nTimes Paused: 0\nFinished at: 4:10:56 PM";
+    testString = "Date: 9:6:2019\nStart time: 3:10:57 PM\nObjective: 17 pushups a minute for 1 hour\nGoal: 1020 pushups in 1 hour\nCompleted: 1020 pushups\n60 minutes have gone by\n0 pushups remaining\n0 minutes remaining\nTimes Paused: 0\nFinished at: 4:10:56 PM",
+    openInNewTab = function(url) {
+      var a = document.createElement("a");
+      a.target = "_blank";
+      a.href = url;
+      a.click();
+    };
 
 // Disclaimer
 $("[data-action=disclaimer]").click(function() {

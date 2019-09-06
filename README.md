@@ -37,6 +37,7 @@ MIT
 Hotkeys
 -------------
 
+* Arrow Keys - Select workout type
 * Enter  - Initialize inputs (also goes to next page after you select workout type)  
 * Escape - Go back a page and/or quit current workout
 * Escape - Initialize new workout
@@ -51,8 +52,8 @@ Tech
 
 Michael's Workout App uses a number of open source projects to work properly:
 
-* [jQuery](http://jquery.com/) - Because the first two libraries abve require it
-* [Normalize](https://github.com/necolas/normalize.css) - A css reset library
+* [jQuery](http://jquery.com/) - Because the [scrollintoview](https://github.com/litera/jquery-scrollintoview) plugin requires it
+* [Normalize](https://github.com/necolas/normalize.css) - CSS reset library
 * [AlertifyJS](https://github.com/fabien-d/alertify.js/tree/0.3) - Customizable notification system
 * [SweetAlert2](https://sweetalert2.github.io/) - Stylish alert dialog
 * [FileSaver.js](https://github.com/eligrey/FileSaver.js/) - Client-side solution for saving files

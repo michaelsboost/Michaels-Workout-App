@@ -4,34 +4,34 @@ var counter = 1, countPause = 1, chosenDifficulty,
     totalhours, now, ahora, time, tiempo, currentH,
     today, saveDate, saveTime, dateTime, currentM,
     randomNum, randomNumber, minLeft, minsLeft, workoutLog,
-    fileSaved = "nope", workoutStatus = "waiting",
-    audioElement     = document.createElement("audio"),
-    audioElement2    = document.createElement("audio"),
-    goSound          = function() {
+    fileSaved = "nope", workoutStatus = "waiting", nextInput,
+    audioElement    = document.createElement("audio"),
+    audioElement2   = document.createElement("audio"),
+    goSound         = function() {
       audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/go.mp3");
       audioElement.play();
     },
-    breakSound       = function() {
+    breakSound      = function() {
       audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/break.mp3");
       audioElement.play();
     },
-    errorSound       = function() {
+    errorSound      = function() {
       audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/error.mp3");
       audioElement.play();
     },
-    abortSound       = function() {
+    abortSound      = function() {
       audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/abort.mp3");
       audioElement.play();
     },
-    retreatSound     = function() {
+    retreatSound    = function() {
       audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/retreat.mp3");
       audioElement.play();
     },
-    finishedSound    = function() {
+    finishedSound   = function() {
       audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/complete.mp3");
       audioElement.play();
     },
-    newWorkout       = function() {
+    newWorkout      = function() {
       // Make sure timer has already been stopped
       clearTimeout(runTimer);
       
@@ -60,6 +60,15 @@ var counter = 1, countPause = 1, chosenDifficulty,
       $("[data-save=workoutlog]").addClass("hide");
       $("[data-display=finish]").addClass("hide");
       return false;
+    },
+    scrollToView = function(el) {
+      el.scrollintoview({
+        duration: "fast",
+        direction: "vertical",
+        complete: function() {
+          // highlight the element so user's focus gets where it needs to be
+        }
+      });
     };
 
 // Disclaimer
@@ -95,6 +104,8 @@ $("[data-action=randomize]").click(function() {
 });
 
 // Global window hotkeys
+// down arrow = 40
+// up arrow = 38
 window.onkeydown = function(e) {
   // Use enter key to confirm type of workout
   if ($("[data-display=typeofworkout]").is(":visible")) {
@@ -155,7 +166,102 @@ window.onkeydown = function(e) {
     }
   }
 };
-// Save workout log
+
+// Use up and down arrows to select workout type
+shortcut.add("down", function() {
+  if ($("[data-display=typeofworkout]").is(":visible")) {
+    if ($("input[name=workoutGroup]").is(":checked")) {
+      if ($("input[name=workoutGroup]:last").is(":checked")) {
+        $("[data-display=typeofworkout] input:first").prop("checked", true).trigger("click");
+        
+        // Scroll to selected workout
+        scrollToView($("[data-display=typeofworkout] input:checked").parent());
+      } else {
+        nextInput = $("[data-display=typeofworkout] input:checked").parent().next().children().filter("input").attr("id");
+        $("[data-display=typeofworkout] #"+ nextInput).prop("checked", true).trigger("click");
+        
+        // Scroll to selected workout
+        scrollToView($("[data-display=typeofworkout] input:checked").parent());
+      }
+    } else {
+      $("[data-display=typeofworkout] input:first").prop("checked", true).trigger("click");
+
+      // Scroll to selected workout
+      scrollToView($("[data-display=typeofworkout] input:checked").parent());
+    }
+  }
+});
+shortcut.add("right", function() {
+  if ($("[data-display=typeofworkout]").is(":visible")) {
+    if ($("input[name=workoutGroup]").is(":checked")) {
+      if ($("input[name=workoutGroup]:last").is(":checked")) {
+        $("[data-display=typeofworkout] input:first").prop("checked", true).trigger("click");
+        
+        // Scroll to selected workout
+        scrollToView($("[data-display=typeofworkout] input:checked").parent());
+      } else {
+        nextInput = $("[data-display=typeofworkout] input:checked").parent().next().children().filter("input").attr("id");
+        $("[data-display=typeofworkout] #"+ nextInput).prop("checked", true).trigger("click");
+        
+        // Scroll to selected workout
+        scrollToView($("[data-display=typeofworkout] input:checked").parent());
+      }
+    } else {
+      $("[data-display=typeofworkout] input:first").prop("checked", true).trigger("click");
+
+      // Scroll to selected workout
+      scrollToView($("[data-display=typeofworkout] input:checked").parent());
+    }
+  }
+});
+shortcut.add("up", function() {
+  if ($("[data-display=typeofworkout]").is(":visible")) {
+    if ($("input[name=workoutGroup]").is(":checked")) {
+      if ($("input[name=workoutGroup]:first").is(":checked")) {
+        $("[data-display=typeofworkout] input:last").prop("checked", true).trigger("click");
+        
+        // Scroll to selected workout
+        scrollToView($("[data-display=typeofworkout] input:checked").parent());
+      } else {
+        nextInput = $("[data-display=typeofworkout] input:checked").parent().prev().children().filter("input").attr("id");
+        $("[data-display=typeofworkout] #"+ nextInput).prop("checked", true).trigger("click");
+        
+        // Scroll to selected workout
+        scrollToView($("[data-display=typeofworkout] input:checked").parent());
+      }
+    } else {
+      $("[data-display=typeofworkout] input:last").prop("checked", true).trigger("click");
+
+      // Scroll to selected workout
+      scrollToView($("[data-display=typeofworkout] input:checked").parent());
+    }
+  }
+});
+shortcut.add("left", function() {
+  if ($("[data-display=typeofworkout]").is(":visible")) {
+    if ($("input[name=workoutGroup]").is(":checked")) {
+      if ($("input[name=workoutGroup]:first").is(":checked")) {
+        $("[data-display=typeofworkout] input:last").prop("checked", true).trigger("click");
+        
+        // Scroll to selected workout
+        scrollToView($("[data-display=typeofworkout] input:checked").parent());
+      } else {
+        nextInput = $("[data-display=typeofworkout] input:checked").parent().prev().children().filter("input").attr("id");
+        $("[data-display=typeofworkout] #"+ nextInput).prop("checked", true).trigger("click");
+        
+        // Scroll to selected workout
+        scrollToView($("[data-display=typeofworkout] input:checked").parent());
+      }
+    } else {
+      $("[data-display=typeofworkout] input:last").prop("checked", true).trigger("click");
+
+      // Scroll to selected workout
+      scrollToView($("[data-display=typeofworkout] input:checked").parent());
+    }
+  }
+});
+
+// Save workout log hotkey
 shortcut.add("ctrl+s", function() {
   if ($("[data-save=workoutlog]").is(":visible")) {
     $("[data-save=workoutlog]").trigger("click");
@@ -166,7 +272,8 @@ shortcut.add("meta+s", function() {
     $("[data-save=workoutlog]").trigger("click");
   }
 });
-// Initialize new workout
+
+// Initialize new workout hotkey
 shortcut.add("ctrl+n", function() {
   if ($("[data-confirm=newworkout]").is(":visible")) {
     $("[data-confirm=newworkout]").trigger("click");

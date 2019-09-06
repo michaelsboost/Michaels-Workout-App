@@ -22,12 +22,14 @@ html, body {
   top: 0;
   left: 0;
   padding: 16px;
+  z-index: 1;
 }
 .randomize {
   position: absolute;
   top: 0;
   right: 0;
   padding: 16px;
+  z-index: 1;
 }
 .clock {
   font-family: 'Orbitron', sans-serif;

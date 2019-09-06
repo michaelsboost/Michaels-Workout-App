@@ -90,6 +90,18 @@ $("[data-action=randomize]").click(function() {
   }
 });
 
+// Use enter key to confirm type of workout
+window.onkeydown = function(e) {
+  if ($("[data-display=typeofworkout]").is(":visible")) {
+    if ($("input[name=workoutGroup]").is(":checked")) {
+      if (e.keyCode == 13 && e.target == document.body) {
+        $("[data-confirm=typeofworkout]").trigger("click");
+        e.preventDefault();
+      }
+    }
+  }
+};
+
 // Back To Workout Parameters
 $("[data-confirm=backtoworkout]").click(function() {
   $("[data-display=workoutparameters]").fadeOut(250);
@@ -262,6 +274,7 @@ $("[data-confirm=pauseworkout]").click(function() {
   if ($("[data-confirm=stopworkout]").is(":visible")) {
     this.textContent = "Start Workout";
     $("[data-confirm=stopworkout]").addClass("hide");
+    $("[data-confirm=quitworkout]").removeClass("hide");
     clearTimeout(runTimer);
     runTimer = 0;
     breakSound();
@@ -269,9 +282,35 @@ $("[data-confirm=pauseworkout]").click(function() {
   } else {
     this.textContent = "Pause Workout";
     $("[data-confirm=stopworkout]").removeClass("hide");
+    $("[data-confirm=quitworkout]").addClass("hide");
     runTimer = 0;
     startWorkout();
   }
+});
+
+// Quit Workout
+$("[data-confirm=quitworkout]").click(function() {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You will have to start all over!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, Quit Workout!'
+  }).then((result) => {
+    if (result.value) {
+      $("[data-display=finish]").removeClass("hide");
+      $("[data-confirm=newworkout]").removeClass("hide");
+      $("[data-save=workoutlog]").removeClass("hide");
+      $("[data-confirm=stopworkout]").addClass("hide");
+      $("[data-confirm=pauseworkout]").addClass("hide");
+      $("[data-confirm=quitworkout]").addClass("hide");
+      $("[data-output=finish]").text(time);
+      clearTimeout(runTimer);
+      abortWorkout();
+    }
+  });
 });
 
 // Workout Finished Initiate New Workout
@@ -288,8 +327,10 @@ $("[data-confirm=newworkout]").click(function() {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes!'
-    }).then(function() {
-      newWorkout();
+    }).then((result) => {
+      if (result.value) {
+        newWorkout();
+      }
     });
   }
 });

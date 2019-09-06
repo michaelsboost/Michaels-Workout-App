@@ -2,7 +2,9 @@
 var counter = 1, countPause = 1, chosenDifficulty,
     chosenWorkoutType, runTimer, pullupspermin,
     totalhours, now, ahora, time, tiempo, currentH,
-    currentM, randomNum, randomNumber,
+    today, saveDate, saveTime, dateTime, currentM,
+    randomNum, randomNumber, minLeft, minsLeft, workoutLog,
+    fileSaved = "nope",
     audioElement     = document.createElement("audio"),
     audioElement2    = document.createElement("audio"),
     goSound          = function() {
@@ -28,6 +30,29 @@ var counter = 1, countPause = 1, chosenDifficulty,
     finishedSound    = function() {
       audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/complete.mp3");
       audioElement.play();
+    },
+    newWorkout       = function() {
+      // Reset to no file saved for new workout log
+      fileSaved = "nope";
+      
+      // Reset text
+      counter = 0;
+      countPause = 0;
+      totalhours    = $("#howmanyhours").val();
+      pullupspermin = $("#repspermin").val();
+      $("[data-count=reps]").text(pullupspermin);
+      $("[data-countdown=reps]").text(totalhours * 60 * pullupspermin);
+      $("[data-count=minutes], [data-output=paused]").text("0");
+
+      // Allow user to reset inputs
+      $("[data-action=randomize]").fadeIn(250);
+      $("[data-display=typeofworkout]").fadeIn(250);
+      $("[data-display=startworkout]").fadeOut(250);
+      $("[data-confirm=pauseworkout]").removeClass("hide");
+      $("[data-confirm=stopworkout]").removeClass("hide");
+      $("[data-confirm=newworkout]").addClass("hide");
+      $("[data-save=workoutlog]").addClass("hide");
+      $("[data-display=finish]").addClass("hide");
     };
 
 // Disclaimer
@@ -100,6 +125,8 @@ $("#repspermin, #howmanyhours").on("keyup change", function() {
   } else {
     $("[data-confirm=workoutparameters]").hide();
   }
+  
+  $("[data-count=minutesleft]").text("59 minutes ");
 });
 
 // Start/Stop The Workout
@@ -115,14 +142,40 @@ function startWorkout() {
   }
   
   runTimer = setInterval(function() {
+    // Display how many minutes have gone by
     $("[data-count=minutes]").text(counter++);
+    minLeft = $("[data-count=minutes]").text();
+    minsLeft = $("[data-count=minutes]").text();
+    
+    if (minLeft === "1") {
+      $("[data-count=minutes]").text(minLeft + " minute has");
+    } else {
+      $("[data-count=minutes]").text(minLeft + " minutes have");
+    }
+    
+    // Display minutes left
+    if (minsLeft === "58") {
+      $("[data-count=minutesleft]").text(59 - minsLeft + " minute");
+    } else {
+      $("[data-count=minutesleft]").text(59 - minsLeft + " minutes");
+    }
+    
+    // Count how many reps
     $("[data-count=reps]").text(parseInt($("#repspermin").val() * counter));
+    
+    // Count how many reps left to do
     $("[data-countdown=reps]").text(parseInt($("[data-calculate=reps]").text() - $("[data-count=reps]").text()));
+    
+    // Let the user know every minute when to execute workout
     goSound();
 
+    // Workout completed
     if ($("[data-countdown=reps]").text() === "0") {
-      $("[data-display=finish], [data-confirm=newworkout]").removeClass("hide");
-      $("[data-confirm=stopworkout], [data-confirm=pauseworkout]").addClass("hide");
+      $("[data-display=finish]").removeClass("hide");
+      $("[data-confirm=newworkout]").removeClass("hide");
+      $("[data-save=workoutlog]").removeClass("hide");
+      $("[data-confirm=stopworkout]").addClass("hide");
+      $("[data-confirm=pauseworkout]").addClass("hide");
       $("[data-output=finish]").text(time);
       clearTimeout(runTimer);
       finishedSound();
@@ -210,25 +263,37 @@ $("[data-confirm=pauseworkout]").click(function() {
 
 // Workout Finished Initiate New Workout
 $("[data-confirm=newworkout]").click(function() {
-//  location.reload(true);
+  // Detect if user saved workout or not
+  if (fileSaved === "saved") {
+    newWorkout();
+  } else {
+    swal({
+      title: "You haven't saved your workout!",
+      text: "Irreversable! We will not be able to recover this workout log. Are you sure you want to lose this workout log?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes!'
+    }).then(function() {
+      newWorkout();
+    });
+  }
+});
 
-  // Reset text
-  counter = 0;
-  countPause = 0;
-  totalhours    = $("#howmanyhours").val();
-  pullupspermin = $("#repspermin").val();
-  $("[data-count=reps]").text(pullupspermin);
-  $("[data-countdown=reps]").text(totalhours * 60 * pullupspermin);
-  $("[data-count=minutes], [data-output=paused]").text("0");
-
-  // Allow user to reset inputs
-  $("[data-action=randomize]").fadeIn(250);
-  $("[data-display=typeofworkout]").fadeIn(250);
-  $("[data-display=startworkout]").fadeOut(250);
-  $("[data-confirm=pauseworkout]").removeClass("hide");
-  $("[data-confirm=stopworkout]").removeClass("hide");
-  $("[data-confirm=newworkout]").addClass("hide");
-  $("[data-display=finish]").addClass("hide");
+// Workout Finished Initiate New Workout
+$("[data-save=workoutlog]").click(function() {
+  // User is saving workout log
+  // Updating variable so user isn't prompted upon new workout
+  fileSaved = "saved";
+  
+  today = new Date();
+  saveDate = today.getMonth() + 1 + "_" + today.getDate() + "_" + today.getFullYear();
+  dateTime = saveDate + " " + $("[data-output=finish]").text();
+  
+  workoutLog = $("[data-content=workoutlog]").text().trim().replace(/[\s]/g," ").replace(/\s{2,}/gm,"\n").toString();
+  blob = new Blob([ workoutLog ], {type: "text/plain"});
+  saveAs(blob, "workout_log " + dateTime + ".txt");
 });
 
 // Animate button on click
@@ -243,7 +308,7 @@ function doBounce(element, times, distance, speed) {
   }        
 }
 
-// Auto Select
+// Auto Fill Bot Test
 //$("[data-display=typeofworkout] #pushups").prop("checked", true).trigger("click");
 //$("[data-confirm=typeofworkout]").trigger("click");
 //$("#repspermin").val("17");

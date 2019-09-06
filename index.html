@@ -7,8 +7,6 @@
     <meta name="description" content="A new way to challenge yourself in the gym!">
     <meta name="author" content="Michael Schwartz">
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
-    <script src="libraries/jquery/jquery.js"></script>
-    <script src="libraries/jquery/jquery-migrate-1.2.1.min.js"></script>
     <link rel="stylesheet" href="libraries/normalize/normalize.css" />
     <link rel="stylesheet" href="libraries/polyui/polyui.css">
     <link rel="stylesheet" href="libraries/font-awesome/font-awesome.css" />
@@ -16,6 +14,10 @@
     <link rel="stylesheet" href="libraries/sweetalert2/sweetalert2.min.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <script src="libraries/jquery/jquery.js"></script>
+    <script src="libraries/jquery/jquery-migrate-1.2.1.min.js"></script>
+    <script src="libraries/filesaver/FileSaver.js"></script>
+    <script src="libraries/filesaver/Blob.js"></script>
   </head>
   <body>
     <!-- Disclaimer -->
@@ -148,28 +150,31 @@
             
             <!-- Start Workout -->
             <div class="hide selectdropdowns startworkout" data-display="startworkout">
-              <p><br>
-                <h1 class="center headline-primary--grouped clock" id="clock">
-                  Total <span data-count="reps">?</span> <span data-output="workouttype" style="text-transform: capitalize;"></span>
-                </h1>
-              </p>
+              <p>&nbsp;</p>
+              <h1 class="center headline-primary--grouped clock" id="clock">
+                Total <span data-count="reps">?</span> <span data-output="workouttype" style="text-transform: capitalize;"></span>
+              </h1>
                 
-              <p>
+              <p>&nbsp;</p>
+              <div data-content="workoutlog">
                 <h1 class="center headline-primary--grouped">
                   Start time: <span data-output="starttime"></span>
                 </h1>
                 <h1 class="center headline-primary--grouped">
-                  Doing: <span data-output="repspermin"></span> <span data-output="workouttype" style="text-transform: capitalize;"></span> a minute for <span data-output="howmanyhours"></span>
+                  Objective: <span data-output="repspermin"></span> <span data-output="workouttype" style="text-transform: capitalize;"></span> a minute for <span data-output="howmanyhours"></span>
                 </h1><br>
                 
                 <h1 class="center headline-primary--grouped">
-                  Total <span data-count="reps">?</span> <span data-output="workouttype" style="text-transform: capitalize;"></span>
+                  Total: <span data-count="reps">?</span> <span data-output="workouttype" style="text-transform: capitalize;"></span>
                 </h1>
                 <h1 class="center headline-primary--grouped">
-                  <span data-count="minutes">?</span> minutes have gone by
+                  <span data-count="minutes">?</span> gone by
                 </h1>
                 <h1 class="center headline-primary--grouped">
-                  <span data-countdown="reps">?</span> <span data-output="workouttype" style="text-transform: capitalize;"></span> left
+                  <span data-countdown="reps">?</span> <span data-output="workouttype" style="text-transform: capitalize;"></span> remaining
+                </h1>
+                <h1 class="center headline-primary--grouped">
+                  <span data-count="minutesleft">?</span> remaining
                 </h1>
                 <h1 class="center headline-primary--grouped">
                   Times Paused: <span data-output="paused">0</span>
@@ -177,8 +182,12 @@
                 <h1 class="center hide headline-primary--grouped" data-display="finish">
                   Finished at: <span data-output="finish">?</span>
                 </h1>
-              </p>
+              </div>
+              <p>&nbsp;</p>
               
+              <button class="hide btn--info confirmdropdown fill" data-save="workoutlog" style="margin-left: 0;">
+                Save Workout Log
+              </button>
               <button class="hide btn--info fill" data-confirm="newworkout" style="margin-left: 0;">
                 New Workout
               </button>
@@ -188,6 +197,8 @@
               <button class="btn--error fill" data-confirm="stopworkout" style="margin-left: 0;">
                 Stop Workout
               </button>
+              <p>&nbsp;</p>
+              
             </div>
           </div>
         </div>

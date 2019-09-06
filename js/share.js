@@ -1,6 +1,7 @@
 // Variables
 var str, startTime,
     testString = "Date: 9:6:2019\nStart time: 3:10:57 PM\nObjective: 17 pushups a minute for 1 hour\nGoal: 1020 pushups in 1 hour\nCompleted: 1020 pushups\n60 minutes have gone by\n0 pushups remaining\n0 minutes remaining\nTimes Paused: 0\nFinished at: 4:10:56 PM",
+    site         = window.location,
     openInNewTab = function(url) {
       var a = document.createElement("a");
       a.target = "_blank";
@@ -24,6 +25,19 @@ $("[data-action=disclaimer]").click(function() {
 
 // Check if page has a hash
 if (window.location.hash) {
+  // Detect if domain is HTTP
+  site = site.toString();
+  if (site.substring(0, 7) === "http://") {
+    // domain is http
+    site = "http%3A//" + site.substring(7, site.length);
+  } else if (site.substring(0, 8) === "https://") {
+    // domain is https
+    site = "https%3A//" + site.substring(8, site.length);
+  } else {
+    // cannot detect http encoding revert to Polyrise domain as default
+    site = "https%3A//michaelsboost.github.io/Michaels-Workout-App/share/" + window.location.hash;
+  }
+  
   // Grab the hash
   str = window.location.hash;
   str = str.substr(1, str.length);

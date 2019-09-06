@@ -180,11 +180,11 @@
                   <input type="number" id="repspermin" name="workoutparameters" placeholder="Reps per minute" min="1" step="1" max="1440">
                 </li>
                 <li>
-                  <input type="number" id="howmanyhours" name="workoutparameters" placeholder="How many hours?" min=".5" max="24" step=".5">
+                  <input type="number" id="howmanyhours" name="workoutparameters" placeholder="How many hours?" min=".25" max="24" step=".25">
                 </li>
                 <li style="border: 0;">
                   <label class="tc">
-                    Total <span data-calculate="reps">?</span> <span data-output="workouttype"></span>
+                    Total <span data-calculate="reps">?</span> <span data-output="workouttype"></span> for <span data-calculate="totalmins"></span>
                   </label>
                 </li>
               </ul>
@@ -200,9 +200,7 @@
             <!-- Start Workout -->
             <div class="hide selectdropdowns startworkout" data-display="startworkout">
               <p>&nbsp;</p>
-              <h1 class="center headline-primary--grouped clock" id="clock">
-                Total <span data-count="reps">?</span> <span data-output="workouttype" style="text-transform: capitalize;"></span>
-              </h1>
+              <h1 class="center headline-primary--grouped clock" id="clock"></h1>
                 
               <p>&nbsp;</p>
               <div data-content="workoutlog">
@@ -217,7 +215,7 @@
                 </h1><br>
                 
                 <h1 class="center headline-primary--grouped">
-                  Total: <span data-count="reps">?</span> <span data-output="workouttype" style="text-transform: capitalize;"></span>
+                  Completed: <span data-count="reps">?</span> <span data-output="workouttype" style="text-transform: capitalize;"></span>
                 </h1>
                 <h1 class="center headline-primary--grouped">
                   <span data-count="minutes">?</span> gone by

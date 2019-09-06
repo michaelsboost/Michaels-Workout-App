@@ -57,7 +57,7 @@ Michael's Workout App uses a number of open source projects to work properly:
 * [AlertifyJS](https://github.com/fabien-d/alertify.js/tree/0.3) - Customizable notification system
 * [SweetAlert2](https://sweetalert2.github.io/) - Stylish alert dialog
 * [FileSaver.js](https://github.com/eligrey/FileSaver.js/) - Client-side solution for saving files
-* [Lity](https://sorgalla.com/lity/) - Lightbox for how to videos (coming soon...)
+* [Lity](https://sorgalla.com/lity/) - Lightbox for how to videos
 
 Development
 -------------

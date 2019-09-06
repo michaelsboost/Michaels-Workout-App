@@ -130,9 +130,11 @@ html, body {
 }
 
 /* Hide play button temporarily until videos are released */
+/*
 .selectdropdowns ul li a[data-lity] {
   display: none;
 }
+*/
 
 /* Misc */
 .hide {

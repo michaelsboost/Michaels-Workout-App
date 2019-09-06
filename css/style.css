@@ -10,26 +10,22 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  text-align: center;
   background: #f8ffe6;
-/*  background: rgba(248, 255, 230, 0.8);*/
   overflow: auto;
 }
 
 /* Main */
-.disclaimer {
+.disclaimer, .randomize {
   position: absolute;
   top: 0;
-  left: 0;
   padding: 16px;
   z-index: 1;
 }
+.disclaimer {
+  left: 0;
+}
 .randomize {
-  position: absolute;
-  top: 0;
   right: 0;
-  padding: 16px;
-  z-index: 1;
 }
 .clock {
   font-family: 'Orbitron', sans-serif;
@@ -51,17 +47,13 @@ html, body {
 
 /* Difficulty */
 .selectdropdowns ul li {
-/*  color: #5a8194;*/
   color: #666;
-/*  border-bottom: 1px solid #5a8194;*/
   border-bottom: 1px solid #43c787;
 }
 .confirmdropdown {
-/*  background: #5a8194;*/
   background: #43c787;
 }
 .selectdropdowns ul li .check {
-/*  border: 5px solid #5a8194;*/
   border: 5px solid #43c787;
 }
 .selectdropdowns ul li {

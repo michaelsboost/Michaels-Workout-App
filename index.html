@@ -19,7 +19,7 @@
     <script src="libraries/filesaver/FileSaver.js"></script>
     <script src="libraries/filesaver/Blob.js"></script>
   </head>
-  <body>
+  <body class="tc">
     <!-- Disclaimer -->
     <h1 class="pointer headline-primary--grouped disclaimer" data-action="disclaimer" title="Disclaimer">
       <i class="fa fa-exclamation-circle"></i>
@@ -116,7 +116,7 @@
                 </li>
               </ul>
               
-              <button class="btn--info confirmdropdown fill" data-confirm="typeofworkout">
+              <button class="btn--info confirmdropdown fill" data-confirm="typeofworkout" data-action="bounce">
                 Confirm
               </button>
             </div>
@@ -140,10 +140,10 @@
                 </li>
               </ul>
               
-              <button class="btn--info hide confirmdropdown fill" data-confirm="workoutparameters">
+              <button class="btn--info hide confirmdropdown fill" data-confirm="workoutparameters" data-action="bounce">
                 Confirm
               </button>
-              <button class="btn--error fill" data-confirm="backtoworkout" style="margin-left: 0;">
+              <button class="btn--error fill" data-confirm="backtoworkout" data-action="bounce" style="margin-left: 0;">
                 Back
               </button>
             </div>
@@ -188,20 +188,17 @@
               </div>
               <p>&nbsp;</p>
               
-              <button class="hide btn--info confirmdropdown fill" data-save="workoutlog" style="margin-left: 0;">
+              <button class="hide btn--info confirmdropdown fill" data-save="workoutlog" data-action="bounce" style="margin-left: 0;">
                 Save Workout Log
               </button>
-              <button class="hide btn--info fill" data-confirm="newworkout" style="margin-left: 0;">
+              <button class="hide btn--info fill" data-confirm="newworkout" data-action="bounce" style="margin-left: 0;">
                 New Workout
               </button>
-              <button class="btn--info fill" data-confirm="pauseworkout" style="margin-left: 0;">
+              <button class="btn--info fill" data-confirm="pauseworkout" data-action="bounce" style="margin-left: 0;">
                 Pause Workout
               </button>
-              <button class="btn--error hide fill" data-confirm="quitworkout" style="margin-left: 0;">
+              <button class="btn--error fill" data-confirm="quitworkout" data-action="bounce" style="margin-left: 0;">
                 Quit Workout
-              </button>
-              <button class="btn--error fill" data-confirm="stopworkout" style="margin-left: 0;">
-                Stop Workout
               </button>
               <p>&nbsp;</p>
               

@@ -4,7 +4,7 @@ var counter = 1, countPause = 1, chosenDifficulty,
     totalhours, now, ahora, time, tiempo, currentH,
     today, saveDate, saveTime, dateTime, currentM,
     randomNum, randomNumber, minLeft, minsLeft, workoutLog,
-    fileSaved = "nope",
+    fileSaved = "nope", workoutStatus = "waiting",
     audioElement     = document.createElement("audio"),
     audioElement2    = document.createElement("audio"),
     goSound          = function() {
@@ -41,8 +41,8 @@ var counter = 1, countPause = 1, chosenDifficulty,
       // Reset text
       counter = 0;
       countPause = 0;
-      totalhours    = $("#howmanyhours").val();
-      pullupspermin = $("#repspermin").val();
+      totalhours    = howmanyhours.value;
+      pullupspermin = repspermin.value;
       $("[data-count=reps]").text(pullupspermin);
       $("[data-countdown=reps]").text(totalhours * 60 * pullupspermin);
       $("[data-count=minutes], [data-output=paused]").text("0");
@@ -52,7 +52,7 @@ var counter = 1, countPause = 1, chosenDifficulty,
       $("[data-display=typeofworkout]").fadeIn(250);
       $("[data-display=startworkout]").fadeOut(250);
       $("[data-confirm=pauseworkout]").removeClass("hide");
-      $("[data-confirm=stopworkout]").removeClass("hide");
+      $("[data-confirm=quitworkout]").removeClass("hide");
       $("[data-confirm=newworkout]").addClass("hide");
       $("[data-save=workoutlog]").addClass("hide");
       $("[data-display=finish]").addClass("hide");
@@ -132,10 +132,10 @@ $("#repspermin, #howmanyhours").on("keyup change", function() {
   // multiply by 4 for hour many pullups per min
   // 4*120 = 480 pullups every min for 2 hours
   
-  totalhours    = $("#howmanyhours").val();
-  pullupspermin = $("#repspermin").val();
+  totalhours    = howmanyhours.value;
+  pullupspermin = repspermin.value;
   
-  if ($("#repspermin").val() && $("#howmanyhours").val()) {
+  if (repspermin.value && howmanyhours.value) {
     $("[data-confirm=workoutparameters]").show();
     $("[data-calculate=reps], [data-calculate=goal]").text(totalhours * 60 * pullupspermin);
   } else {
@@ -143,11 +143,8 @@ $("#repspermin, #howmanyhours").on("keyup change", function() {
   }
   
   $("[data-count=minutesleft]").text($("#howmanyhours").val() * 60 - 1 + " minutes");
-});
-
-// Start workout by pressing enter key on workout parameters (if has a value)
-$("#repspermin, #howmanyhours").on("keydown", function(e) {
-  if ($("#repspermin").val() && $("#howmanyhours").val()) {
+}).on("keydown", function(e) {
+  if (repspermin.value && howmanyhours.value) {
     if (e.which === 13) {
       $("[data-confirm=workoutparameters]").trigger("click");
     }
@@ -186,7 +183,7 @@ function startWorkout() {
     }
     
     // Count how many reps
-    $("[data-count=reps]").text(parseInt($("#repspermin").val() * counter));
+    $("[data-count=reps]").text(parseInt(repspermin.value * counter));
     
     // Count how many reps left to do
     $("[data-countdown=reps]").text(parseInt($("[data-calculate=reps]").text() - $("[data-count=reps]").text()));
@@ -199,7 +196,7 @@ function startWorkout() {
       $("[data-display=finish]").removeClass("hide");
       $("[data-confirm=newworkout]").removeClass("hide");
       $("[data-save=workoutlog]").removeClass("hide");
-      $("[data-confirm=stopworkout]").addClass("hide");
+      $("[data-confirm=quitworkout]").addClass("hide");
       $("[data-confirm=pauseworkout]").addClass("hide");
       $("[data-output=finish]").text(time);
       clearTimeout(runTimer);
@@ -224,8 +221,10 @@ displayTime();
 
 // Start The Workout
 $("[data-confirm=workoutparameters]").click(function() {
-  totalhours    = $("#howmanyhours").val();
-  pullupspermin = $("#repspermin").val();
+  workoutStatus = "running";
+  
+  totalhours    = howmanyhours.value;
+  pullupspermin = repspermin.value;
   $("[data-count=reps]").text(pullupspermin);
   $("[data-display=workoutparameters]").fadeOut(250);
   $("[data-action=randomize]").fadeOut(250);
@@ -237,58 +236,6 @@ $("[data-confirm=workoutparameters]").click(function() {
 });
 
 // Abort The Workout
-$("[data-confirm=stopworkout]").click(function() {
-  Swal.fire({
-    title: 'Are you sure?',
-    text: "You will have to start all over!",
-    type: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, Quit Workout!'
-  }).then(function() {
-    abortWorkout();
-    
-    // Reset text
-    counter = 0;
-    countPause = 0;
-    totalhours    = $("#howmanyhours").val();
-    pullupspermin = $("#repspermin").val();
-    $("[data-count=reps]").text(pullupspermin);
-    $("[data-countdown=reps]").text(totalhours * 60 * pullupspermin);
-    $("[data-count=minutes], [data-output=paused]").text("0");
-
-    // Allow user to reset inputs
-    $("[data-action=randomize]").fadeIn(250);
-    $("[data-display=typeofworkout]").fadeIn(250);
-    $("[data-display=startworkout]").fadeOut(250);
-    $("[data-confirm=pauseworkout]").removeClass("hide");
-    $("[data-confirm=stopworkout]").removeClass("hide");
-    $("[data-confirm=newworkout]").addClass("hide");
-    $("[data-display=finish]").addClass("hide");
-  });
-});
-
-// Pause Workout
-$("[data-confirm=pauseworkout]").click(function() {
-  if ($("[data-confirm=stopworkout]").is(":visible")) {
-    this.textContent = "Start Workout";
-    $("[data-confirm=stopworkout]").addClass("hide");
-    $("[data-confirm=quitworkout]").removeClass("hide");
-    clearTimeout(runTimer);
-    runTimer = 0;
-    breakSound();
-    $("[data-output=paused]").text(countPause++);
-  } else {
-    this.textContent = "Pause Workout";
-    $("[data-confirm=stopworkout]").removeClass("hide");
-    $("[data-confirm=quitworkout]").addClass("hide");
-    runTimer = 0;
-    startWorkout();
-  }
-});
-
-// Quit Workout
 $("[data-confirm=quitworkout]").click(function() {
   Swal.fire({
     title: 'Are you sure?',
@@ -300,17 +247,37 @@ $("[data-confirm=quitworkout]").click(function() {
     confirmButtonText: 'Yes, Quit Workout!'
   }).then((result) => {
     if (result.value) {
+      workoutStatus = "waiting";
+      
       $("[data-display=finish]").removeClass("hide");
       $("[data-confirm=newworkout]").removeClass("hide");
       $("[data-save=workoutlog]").removeClass("hide");
-      $("[data-confirm=stopworkout]").addClass("hide");
+      $(this).addClass("hide");
       $("[data-confirm=pauseworkout]").addClass("hide");
-      $("[data-confirm=quitworkout]").addClass("hide");
       $("[data-output=finish]").text(time);
       clearTimeout(runTimer);
       abortWorkout();
     }
   });
+});
+
+// Pause Workout
+$("[data-confirm=pauseworkout]").click(function() {
+  if (workoutStatus === "running") {
+    workoutStatus = "paused";
+    
+    this.textContent = "Start Workout";
+    clearTimeout(runTimer);
+    runTimer = 0;
+    breakSound();
+    $("[data-output=paused]").text(countPause++);
+  } else {
+    workoutStatus = "running";
+
+    this.textContent = "Pause Workout";
+    runTimer = 0;
+    startWorkout();
+  }
 });
 
 // Workout Finished Initiate New Workout
@@ -351,7 +318,7 @@ $("[data-save=workoutlog]").click(function() {
 });
 
 // Animate button on click
-$("[data-confirm=typeofworkout], [data-confirm=workoutparameters], [data-confirm=stopworkout]").on("click", function() {
+$("[data-action=bounce]").on("click", function() {
   doBounce($(this), 2, '15px', 50);   
   return false;
 });
@@ -365,6 +332,6 @@ function doBounce(element, times, distance, speed) {
 // Auto Fill Bot Test
 //$("[data-display=typeofworkout] #pushups").prop("checked", true).trigger("click");
 //$("[data-confirm=typeofworkout]").trigger("click");
-//$("#repspermin").val("17");
+//repspermin.value = 17;
 //$("#howmanyhours").val("1").trigger("change");
 //$("[data-confirm=workoutparameters]").trigger("click");

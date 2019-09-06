@@ -21,7 +21,7 @@ Then Execute!
 ![](https://raw.githubusercontent.com/michaelsboost/Michaels-Workout-App/gh-pages/screenshot4.png)
 ![](https://raw.githubusercontent.com/michaelsboost/Michaels-Workout-App/gh-pages/screenshot5.png)
 
-[Want to know what the saved file of your workout log looks like?](https://github.com/michaelsboost/Michaels-Workout-App/blob/gh-pages/workout_log%209_6_2019%202_56_38%20AM.txt)
+[Want to know what the saved file of your workout log looks like?](https://github.com/michaelsboost/Michaels-Workout-App/blob/gh-pages/workout_log%209_6_2019%205_30_26%20AM.txt)
 -------------
 
 Version
@@ -33,6 +33,18 @@ License
 -------------
 
 MIT
+
+Hotkeys
+-------------
+
+* Enter  - Initialize inputs (also goes to next page after you select workout type)  
+* Escape - Go back a page and/or quit current workout
+* Escape - Initialize new workout
+* Spacebar - Pause/Resume workout
+* Spacebar - Initialize new workout
+* Ctrl+S - Save workout log  
+* Cmd+S  - Save workout log on a Mac  
+* Ctrl+N - Initialize new workout  
 
 Tech
 -------------

@@ -38,6 +38,9 @@ var counter = 1, countPause = 1, chosenDifficulty,
       // Reset to no file saved for new workout log
       fileSaved = "nope";
       
+      // Reset workout status to waiting
+      workoutStatus = "waiting";
+      
       // Reset text
       counter = 0;
       countPause = 0;
@@ -56,6 +59,7 @@ var counter = 1, countPause = 1, chosenDifficulty,
       $("[data-confirm=newworkout]").addClass("hide");
       $("[data-save=workoutlog]").addClass("hide");
       $("[data-display=finish]").addClass("hide");
+      return false;
     };
 
 // Disclaimer
@@ -90,19 +94,86 @@ $("[data-action=randomize]").click(function() {
   }
 });
 
-// Use enter key to confirm type of workout
+// Global window hotkeys
 window.onkeydown = function(e) {
+  // Use enter key to confirm type of workout
   if ($("[data-display=typeofworkout]").is(":visible")) {
     if ($("input[name=workoutGroup]").is(":checked")) {
       if (e.keyCode == 13 && e.target == document.body) {
         $("[data-confirm=typeofworkout]").trigger("click");
-        e.preventDefault();
+        return false;
+      }
+    }
+  }
+  
+  // Workout parameters enter and escape keys
+  if ($("[data-display=workoutparameters]").is(":visible")) {
+    // Use escape key to go back to workout parameters
+    if (e.keyCode == 27 && e.target == document.body) {
+      $("[data-confirm=backtoworkout]").trigger("click");
+      return false;
+    }
+    
+    // Use enter key to confirm workout parameters
+    if (e.keyCode == 13 && e.target == document.body) {
+      $("[data-confirm=workoutparameters]").trigger("click");
+      return false;
+    }
+  }
+  
+  // Workout Start/Pause and Quit hotkeys
+  if ($("[data-display=startworkout]").is(":visible")) {
+    if ($("[data-confirm=quitworkout]").is(":visible")) {
+      // Use escape key to quit workout
+      if (e.keyCode == 27 && e.target == document.body) {
+        $("[data-confirm=quitworkout]").trigger("click");
+        return false;
+      }
+    }
+    
+    // Use spacebar to toggle start/pause workout
+    if ($("[data-confirm=pauseworkout]").is(":visible")) {
+      if (workoutStatus === "running" || workoutStatus === "paused") {
+        if (e.keyCode == 32 && e.target == document.body) {
+          $("[data-confirm=pauseworkout]").trigger("click");
+          return false;
+        }
+      }
+    }
+    // Spacebar to initiate a new workout
+    if ($("[data-confirm=newworkout]").is(":visible")) {
+      // escape key to initiate a new workout
+      if (e.keyCode == 27 && e.target == document.body) {
+        $("[data-confirm=newworkout]").trigger("click");
+        return false;
+      }
+      // spacebar key to initiate a new workout
+      if (e.keyCode == 32 && e.target == document.body) {
+        $("[data-confirm=newworkout]").trigger("click");
+        return false;
       }
     }
   }
 };
+// Save workout log
+shortcut.add("ctrl+s", function() {
+  if ($("[data-save=workoutlog]").is(":visible")) {
+    $("[data-save=workoutlog]").trigger("click");
+  }
+});
+shortcut.add("meta+s", function() {
+  if ($("[data-save=workoutlog]").is(":visible")) {
+    $("[data-save=workoutlog]").trigger("click");
+  }
+});
+// Initialize new workout
+shortcut.add("ctrl+n", function() {
+  if ($("[data-confirm=newworkout]").is(":visible")) {
+    $("[data-confirm=newworkout]").trigger("click");
+  }
+});
 
-// Back To Workout Parameters
+// Back To Type of Workout
 $("[data-confirm=backtoworkout]").click(function() {
   $("[data-display=workoutparameters]").fadeOut(250);
   $("[data-display=typeofworkout]").fadeIn(250);
@@ -145,6 +216,10 @@ $("#repspermin, #howmanyhours").on("keyup change", function() {
   
   $("[data-count=minutesleft]").text($("#howmanyhours").val() * 60 - 1 + " minutes");
 }).on("keydown", function(e) {
+  // press escape to go back to type of workout
+  if (e.which === 27) {
+    $("[data-confirm=backtoworkout]").trigger("click");
+  }
   if (repspermin.value && howmanyhours.value) {
     if (e.which === 13) {
       $("[data-confirm=workoutparameters]").trigger("click");
@@ -206,6 +281,9 @@ function startWorkout() {
   }, 60000);
 }
 function abortWorkout() {
+  countPause = 1;
+  workoutStatus = "waiting";
+  $("[data-display=break]").html("&nbsp;");
   $("[data-action=randomize]").fadeIn(250);
   clearTimeout(runTimer);
   abortSound();
@@ -248,8 +326,7 @@ $("[data-confirm=quitworkout]").click(function() {
     confirmButtonText: 'Yes, Quit Workout!'
   }).then((result) => {
     if (result.value) {
-      workoutStatus = "waiting";
-      
+      $("[data-confirm=pauseworkout]").text("Pause Workout");
       $("[data-display=finish]").removeClass("hide");
       $("[data-confirm=newworkout]").removeClass("hide");
       $("[data-save=workoutlog]").removeClass("hide");
@@ -267,17 +344,21 @@ $("[data-confirm=pauseworkout]").click(function() {
   if (workoutStatus === "running") {
     workoutStatus = "paused";
     
-    this.textContent = "Start Workout";
+    this.textContent = "Resume Workout";
     clearTimeout(runTimer);
     runTimer = 0;
     breakSound();
     $("[data-output=paused]").text(countPause++);
+    $("[data-display=break]").html("On Break<br><br>");
+    return false;
   } else {
     workoutStatus = "running";
 
     this.textContent = "Pause Workout";
     runTimer = 0;
     startWorkout();
+    $("[data-display=break]").html("&nbsp;");
+    return false;
   }
 });
 

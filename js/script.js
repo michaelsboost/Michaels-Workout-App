@@ -32,6 +32,9 @@ var counter = 1, countPause = 1, chosenDifficulty,
       audioElement.play();
     },
     newWorkout       = function() {
+      // Make sure timer has already been stopped
+      clearTimeout(runTimer);
+      
       // Reset to no file saved for new workout log
       fileSaved = "nope";
       
@@ -121,7 +124,7 @@ $("#repspermin, #howmanyhours").on("keyup change", function() {
   
   if ($("#repspermin").val() && $("#howmanyhours").val()) {
     $("[data-confirm=workoutparameters]").show();
-    $("[data-calculate=reps]").text(totalhours * 60 * pullupspermin);
+    $("[data-calculate=reps], [data-calculate=goal]").text(totalhours * 60 * pullupspermin);
   } else {
     $("[data-confirm=workoutparameters]").hide();
   }
@@ -206,7 +209,7 @@ $("[data-confirm=workoutparameters]").click(function() {
   $("[data-action=randomize]").fadeOut(250);
   $("[data-display=startworkout]").fadeIn(250);
   $("[data-countdown=reps]").text(totalhours * 60 * pullupspermin);
-  $("[data-count=minutes]").text("0");
+  $("[data-count=minutes]").text("0 minutes have");
   startWorkout();
   goSound();
 });

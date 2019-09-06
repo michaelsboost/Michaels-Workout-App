@@ -62,11 +62,12 @@ var counter = 1, countPause = 1, chosenDifficulty,
 $("[data-action=disclaimer]").click(function() {
   var msg1 = "I Michael Schwartz developed this workout app for myself and myself only!\n\n",
       msg2 = "I am not held liable if you do any of the workouts listed in this app!\n\n",
-      msg3 = "By using this app you agree that you're doing these workouts by your own discression only!";
+      msg3 = "By using this app you agree that you're doing these workouts by your own discression only!<br><br>",
+      msg4 = "Contribution and Source Code: <br><a href='https://github.com/michaelsboost/Michaels-Workout-App/'>https://github.com/michaelsboost/Michaels-Workout-App/</a>";
       
-  swal({
+  Swal.fire({
     title: "Disclaimer",
-    text: msg1 + msg2 + msg3,
+    html: msg1 + msg2 + msg3 + msg4,
     type: "warning"
   });
 });
@@ -225,7 +226,7 @@ $("[data-confirm=workoutparameters]").click(function() {
 
 // Abort The Workout
 $("[data-confirm=stopworkout]").click(function() {
-  swal({
+  Swal.fire({
     title: 'Are you sure?',
     text: "You will have to start all over!",
     type: 'warning',
@@ -279,7 +280,7 @@ $("[data-confirm=newworkout]").click(function() {
   if (fileSaved === "saved") {
     newWorkout();
   } else {
-    swal({
+    Swal.fire({
       title: "You haven't saved your workout!",
       text: "Irreversable! We will not be able to recover this workout log. Are you sure you want to lose this workout log?",
       type: 'warning',

@@ -56,4 +56,11 @@ Of course the app is free and open source, so you can always fork the project an
 
 [![ko-fi](https://az743702.vo.msecnd.net/cdn/kofi2.png?v=0)](https://ko-fi.com/michaelsboost)
 
-If my Workout App was at all helpful for you. You can show your appreciation by [Donating via SquareCash](https://cash.me/$michaelsboost) and/or [PayPal](https://www.paypal.me/mikethedj4)
+If my Workout App was at all helpful for you. You can show your appreciation a few ways...
+
+1) Registering on my store as a customer: http://michaelsboost.com/store
+2) Buying me a coffee! http://ko-fi.com/michaelsboost
+3) Purchasing one of my t-shirts: https://michaelsboost.com/gear
+4) Purchasing any of my art: https://deviantart.com/michaelsboost
+5) Donating via PayPal: https://michaelsboost.com/donate
+6) Donating via SquareCash: https://cash.me/$michaelsboost

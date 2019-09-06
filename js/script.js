@@ -1,6 +1,6 @@
 // Variables
 var counter = 1, countPause = 1, chosenDifficulty,
-    chosenWorkoutType, runTimer, pullupspermin,
+    chosenWorkoutType, selectedWorkoutType, runTimer, pullupspermin,
     totalhours, now, ahora, time, tiempo, currentH,
     today, saveDate, saveTime, dateTime, currentM,
     randomNum, randomNumber, minLeft, minsLeft, workoutLog,
@@ -117,7 +117,8 @@ $("[data-confirm=typeofworkout]").click(function() {
     $("[data-display=workoutparameters]").fadeIn(250);
     
     chosenWorkoutType = $("[data-display=typeofworkout] input:checked").attr("id");
-    $("[data-output=workouttype]").text( $("[data-display=typeofworkout] label[for="+ chosenWorkoutType +"]").text() );
+    selectedWorkoutType = $("[data-display=typeofworkout] label[for="+ chosenWorkoutType +"]").text()
+    $("[data-output=workouttype]").text( selectedWorkoutType );
   }
 });
 

@@ -63,7 +63,7 @@ $("[data-action=disclaimer]").click(function() {
   var msg1 = "I Michael Schwartz developed this workout app for myself and myself only!\n\n",
       msg2 = "I am not held liable if you do any of the workouts listed in this app!\n\n",
       msg3 = "By using this app you agree that you're doing these workouts by your own discression only!<br><br>",
-      msg4 = "Contribution and Source Code: <br><a href='https://github.com/michaelsboost/Michaels-Workout-App/'>https://github.com/michaelsboost/Michaels-Workout-App/</a>";
+      msg4 = "Contribution and Source Code: <br><a href='https://github.com/michaelsboost/Michaels-Workout-App/' target='_blank'>https://github.com/michaelsboost/Michaels-Workout-App/</a>";
       
   Swal.fire({
     title: "Disclaimer",

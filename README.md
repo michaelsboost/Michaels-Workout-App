@@ -21,6 +21,9 @@ Then Execute!
 ![](https://raw.githubusercontent.com/michaelsboost/Michaels-Workout-App/gh-pages/screenshot4.png)
 ![](https://raw.githubusercontent.com/michaelsboost/Michaels-Workout-App/gh-pages/screenshot5.png)
 
+[Want to know what the saved file of your workout log looks like?](https://github.com/michaelsboost/Michaels-Workout-App/blob/gh-pages/workout_log%209_6_2019%202_56_38%20AM.txt)
+-------------
+
 Version
 -------------
 

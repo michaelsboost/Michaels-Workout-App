@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shared Workout Log: </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta name="description" content="A new way to challenge yourself in the gym!">
+    <meta name="author" content="Michael Schwartz">
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <link rel="stylesheet" href="libraries/normalize/normalize.css" />
+    <link rel="stylesheet" href="libraries/polyui/polyui.css">
+    <link rel="stylesheet" href="libraries/font-awesome/font-awesome.css" />
+    <link rel="stylesheet" href="libraries/font-awesome/macset.css" />
+    <link rel="stylesheet" href="libraries/sweetalert2/sweetalert2.min.css" />
+    <link rel="stylesheet" href="libraries/lity/lity.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <script src="libraries/jquery/jquery.js"></script>
+    <script src="libraries/jquery/jquery-migrate-1.2.1.min.js"></script>
+    <script src="libraries/filesaver/FileSaver.js"></script>
+    <script src="libraries/filesaver/Blob.js"></script>
+  </head>
+  <body class="tc">
+    <!-- Disclaimer -->
+    <h1 class="pointer headline-primary--grouped disclaimer" data-action="disclaimer" title="Disclaimer">
+      <i class="fa fa-exclamation-circle"></i>
+    </h1>
+    
+    <!-- Centered Game Area -->
+    <div class="table">
+      <div class="cell">
+        <div class="grid">
+          <div class="centered grid__col--9">
+           
+            <!-- Shared Workout -->
+            <div class="selectdropdowns startworkout">
+              <h1 class="center headline-primary--grouped">&nbsp;</h1>
+              <h1 class="center headline-primary--grouped" data-output="workoutlog"></h1>
+              <h1 class="center headline-primary--grouped">&nbsp;</h1>
+              
+              <a class="btn--info confirmdropdown fill" href="./index.html" data-start="workout" data-action="bounce" style="margin-left: 0;">
+                Start a workout
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="polyriseblock notgrid bg-overlay3" style="box-shadow: rgba(99, 121, 207, 0) 0px 0px 0px 1600px inset; padding: 2em 0px; background-color: rgb(255, 255, 255);">
+          <div class="grid">
+            <div class="panel--centered centered grid__col--12">
+              <h1 style="margin-bottom: .5em; text-transform: uppercase;" class="editable">Share This Workout!</h1>
+
+              <div style="font-size: 3rem;">
+                <a href="javascript:void(0)" data-shareto="facebook" style="color: #4862A3;">
+                  <i class="fa fa-facebook"></i>
+                </a>
+                &nbsp;
+                <a href="javascript:void(0)" data-shareto="twitter" style="color: #1DA1F2;">
+                  <i class="fa fa-twitter"></i>
+                </a>
+                &nbsp;
+                <a href="javascript:void(0)" data-shareto="googleplus" style="color: #c7654f;">
+                  <i class="fa fa-google-plus"></i>
+                </a>
+                &nbsp;
+                <a href="javascript:void(0)" data-shareto="linkedin" style="color: #0077B5;">
+                  <i class="fa fa-linkedin"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="polyriseblock notgrid bg-overlay3" style="box-shadow: rgba(99, 121, 207, 0) 0px 0px 0px 1600px inset; padding: 2em 0px; background-color: rgb(51, 51, 51);">
+          <div class="grid">
+            <div class="grid__col--12 tc">
+              <a href="http://michaelsboost.github.io/" target="_blank">
+                <img class="img--avatar ib" src="media/dev-avatar.png" style="height: 135px;" alt="Avatar">
+              </a>
+
+              <p class="whitetxt">
+                Made with <span class="fa fa-heart" style="color: #f66;"></span> and <span class="fa fa-coffee" style="color: #52bab3;"></span> by <a class="whitetxt" href="http://michaelsboost.github.io/" target="_blank"><u>Michael</u></a> &amp; others. &nbsp; <a href="https://github.com/michaelsboost/Michaels-Workout-App/" target="_blank" class="whitetxt">
+                  <u>
+                    <i class="fa fa-external-link"></i>
+                  </u>
+                </a>
+              </p>
+
+              <!-- Display Random Ads -->
+              <div style="padding-top: 30px;">
+                <script src="//michaelsboost.github.io/DynamicJSAds/ads.js" id="insertAds"></script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="libraries/alertifyjs/alertify.min.js"></script>
+    <script src="libraries/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="libraries/shortcut/shortcut.js"></script>
+    <script src="libraries/lity/lity.js"></script>
+    <script src="js/jquery.scrollintoview.js"></script>
+    <script src="js/share.js"></script>
+    <script src="js/detecthttp.js"></script>
+  </body>
+</html>

@@ -58,6 +58,7 @@ var counter = 0, countPause = 1, chosenDifficulty,
       $("[data-confirm=quitworkout]").removeClass("hide");
       $("[data-confirm=newworkout]").addClass("hide");
       $("[data-save=workoutlog]").addClass("hide");
+      $("[data-share=workoutlog]").addClass("hide");
       $("[data-display=finish]").addClass("hide");
       return false;
     },
@@ -278,6 +279,18 @@ shortcut.add("left", function() {
 });
 
 // Save workout log hotkey
+shortcut.add("ctrl+e", function() {
+  if ($("[data-share=workoutlog]").is(":visible")) {
+    $("[data-share=workoutlog]").trigger("click");
+  }
+});
+shortcut.add("meta+e", function() {
+  if ($("[data-share=workoutlog]").is(":visible")) {
+    $("[data-share=workoutlog]").trigger("click");
+  }
+});
+
+// Share workout log hotkey
 shortcut.add("ctrl+s", function() {
   if ($("[data-save=workoutlog]").is(":visible")) {
     $("[data-save=workoutlog]").trigger("click");
@@ -390,6 +403,11 @@ function startWorkout() {
   ahora = new Date();
   tiempo = ahora.toLocaleTimeString();
   $("[data-output=starttime]").text(tiempo);
+  
+  today = new Date();
+  saveDate = today.getMonth() + 1 + ":" + today.getDate() + ":" + today.getFullYear();
+  $("[data-output=startdate]").text(saveDate);
+  
   $("[data-output=repspermin]").text(repspermin.value);
   if (howmanyhours.value <= "1") {
     $("[data-output=howmanyhours]").text(howmanyhours.value + " hour");
@@ -424,6 +442,7 @@ function startWorkout() {
       $("[data-display=finish]").removeClass("hide");
       $("[data-confirm=newworkout]").removeClass("hide");
       $("[data-save=workoutlog]").removeClass("hide");
+      $("[data-share=workoutlog]").removeClass("hide");
       $("[data-confirm=quitworkout]").addClass("hide");
       $("[data-confirm=pauseworkout]").addClass("hide");
       $("[data-output=finish]").text(time);
@@ -483,6 +502,7 @@ $("[data-confirm=quitworkout]").click(function() {
       $("[data-display=finish]").removeClass("hide");
       $("[data-confirm=newworkout]").removeClass("hide");
       $("[data-save=workoutlog]").removeClass("hide");
+      $("[data-share=workoutlog]").removeClass("hide");
       $(this).addClass("hide");
       $("[data-confirm=pauseworkout]").addClass("hide");
       $("[data-output=finish]").text(time);
@@ -537,7 +557,7 @@ $("[data-confirm=newworkout]").click(function() {
   }
 });
 
-// Save Workout Log
+// Save Workout Log As File
 $("[data-save=workoutlog]").click(function() {
   // User is saving workout log
   // Updating variable so user isn't prompted upon new workout
@@ -550,6 +570,19 @@ $("[data-save=workoutlog]").click(function() {
   workoutLog = $("[data-content=workoutlog]").text().trim().replace(/\s{2,}/gm,"\n").toString();
   blob = new Blob([ workoutLog ], {type: "text/plain"});
   saveAs(blob, "workout_log " + dateTime + ".txt");
+});
+
+// Share Workout Log To The Web
+$("[data-share=workoutlog]").click(function() {
+  workoutLog = $("[data-content=workoutlog]").text().trim().replace(/\s{2,}/gm,"\n").toString();
+  workoutLog = workoutLog.replace(/\n/g,"\\n");
+  workoutLog = workoutLog.replace(/ /g,"%20");
+
+  var link = document.createElement('a');
+//  link.href = "file:///Users/michael/Documents/GitHub/Michaels-Workout-App/share.html#" + workoutLog;
+  link.href = "http://michaelsboost.com/Michaels-Workout-App/share.html#" + workoutLog;
+  link.setAttribute('target', '_blank');
+  link.click();
 });
 
 // Animate button on click
@@ -571,5 +604,5 @@ function doBounce(element, times, distance, speed) {
 //$("[data-display=typeofworkout] #pushups").prop("checked", true).trigger("click");
 //$("[data-confirm=typeofworkout]").trigger("click");
 //repspermin.value = 17;
-//$("#howmanyhours").val("1").trigger("change");
+//$("#howmanyhours").val(".25").trigger("change");
 //$("[data-confirm=workoutparameters]").trigger("click");

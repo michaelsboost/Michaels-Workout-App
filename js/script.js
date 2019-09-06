@@ -562,6 +562,9 @@ function doBounce(element, times, distance, speed) {
   }        
 }
 
+// Auto open how to video
+//$("[data-display=typeofworkout] a:first").trigger("click");
+
 // Auto Fill Bot Test
 //$("[data-display=typeofworkout] #pushups").prop("checked", true).trigger("click");
 //$("[data-confirm=typeofworkout]").trigger("click");

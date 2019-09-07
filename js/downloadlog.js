@@ -65,14 +65,16 @@ if (window.location.hash) {
 //  window.location.href = "./index.html";
 }
 
-html2canvas(document.querySelector(".grablog")).then(function(canvas) {
-  canvas.id = "thecanvas";
-  canvas.className = "hide";
-  myCanvas = document.getElementById("thecanvas");
-  imageURL = canvas.toDataURL();
-  openInNewTab(imageURL);
-  
-  document.body.appendChild(canvas);
+document.addEventListener('DOMContentLoaded', function() {
+  html2canvas(document.querySelector(".grablog")).then(function(canvas) {
+    canvas.id = "thecanvas";
+    canvas.className = "hide";
+    myCanvas = document.getElementById("thecanvas");
+    imageURL = canvas.toDataURL();
+    openInNewTab(imageURL);
+
+    document.body.appendChild(canvas);
+  });
 });
 
 // Animate button on click

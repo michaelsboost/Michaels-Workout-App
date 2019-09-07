@@ -592,8 +592,8 @@ $("[data-download=workoutlog]").click(function() {
   // initialize preview to download image
   var frame = document.createElement("iframe");
   frame.setAttribute("id", "preview");
-  frame.setAttribute("src", "file:///Users/michael/Documents/GitHub/Michaels-Workout-App/downloadlog.html#" + workoutLog);
-//  frame.setAttribute("src", "http://michaelsboost.com/Michaels-Workout-App/downloadlog.html#" + workoutLog);
+//  frame.setAttribute("src", "file:///Users/michael/Documents/GitHub/Michaels-Workout-App/downloadlog.html#" + workoutLog);
+  frame.setAttribute("src", "http://michaelsboost.com/Michaels-Workout-App/downloadlog.html#" + workoutLog);
   frame.setAttribute("sandbox", "allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts");
   document.body.appendChild(frame);
   return false;

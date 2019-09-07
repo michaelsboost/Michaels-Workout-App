@@ -73,12 +73,6 @@ var counter = 0, countPause = 1, chosenDifficulty,
       });
     };
 
-// Prevent lity default behavior until how to videos are completed
-$("a[data-lity]").on("click", function() {
-  alertify.log("coming soon...");
-  return false;
-});
-
 // Disclaimer
 $("[data-action=disclaimer]").click(function() {
   var msg1 = "I Michael Schwartz developed this workout app for myself and myself only!\n\n",
@@ -91,6 +85,19 @@ $("[data-action=disclaimer]").click(function() {
     html: msg1 + msg2 + msg3 + msg4,
     type: "warning"
   });
+});
+
+// Only play video if there's an internet connection
+$("a[data-lity]").on("click", function() {
+  if (!navigator.onLine) {
+    alertify.error("Can't play video: No internet connection!'");
+    return false;
+  }
+  
+  if ($(this).attr("data-check") === "comingsoon") {
+    alertify.log("coming soon...");
+    return false;
+  }
 });
 
 // Randomize Workout

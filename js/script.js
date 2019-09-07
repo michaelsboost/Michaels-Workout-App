@@ -3,10 +3,11 @@ var counter = 0, countPause = 1, chosenDifficulty,
     chosenWorkoutType, selectedWorkoutType, runTimer, pullupspermin,
     totalhours, now, ahora, time, tiempo, currentH,
     today, saveDate, saveTime, dateTime, currentM,
-    randomNum, randomNumber, minLeft, workoutLog,
+    randomNum, randomNumber, minLeft, workoutLog, grabListID,
     fileSaved = "nope", workoutStatus = "waiting", nextInput,
     audioElement    = document.createElement("audio"),
     audioElement2   = document.createElement("audio"),
+    site            = window.location.toString(),
     goSound         = function() {
       audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/go.mp3");
       audioElement.play();
@@ -108,6 +109,12 @@ $("[data-action=randomize]").click(function() {
     howmanyhours.value = parseInt(1 + randomNumber);
     $("#repspermin").trigger("change");
   }
+});
+
+// Trigger check on input if .check symbol clicked
+$("[data-display=typeofworkout] ul li .check").on("click", function() {
+  grabListID = $(this).prev().prev().attr("id");
+  $("[data-display=typeofworkout] #" + grabListID).prop("checked", true).trigger("click");
 });
 
 // Global window hotkeys
@@ -589,11 +596,17 @@ $("[data-download=workoutlog]").click(function() {
     $("#preview").remove();
   }
   
+  // update site variable
+  if (site.substring(0, site.indexOf('index.html'))) {
+    site = site.replace(/index.html/g, "downloadlog.html");
+  } else {
+    site = site + "downloadlog.html";
+  }
+  
   // initialize preview to download image
   var frame = document.createElement("iframe");
   frame.setAttribute("id", "preview");
-//  frame.setAttribute("src", "file:///Users/michael/Documents/GitHub/Michaels-Workout-App/downloadlog.html#" + workoutLog);
-  frame.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/downloadlog.html#" + workoutLog);
+  frame.setAttribute("src", site + "#" + workoutLog);
   frame.setAttribute("sandbox", "allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-downloads-without-user-activation");
   document.body.appendChild(frame);
   return false;

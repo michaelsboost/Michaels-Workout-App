@@ -96,6 +96,7 @@ html, body {
 }
 .selectdropdowns ul li label {
   padding: 30px 80px;
+  width: calc(100% - 30px);
 }
 .selectdropdowns ul li a {
   padding: 30px 0;

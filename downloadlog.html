@@ -29,7 +29,7 @@
     <!-- Centered Game Area -->
     <div class="table">
       <div class="cell">
-        <div class="grid">
+        <div class="grid grablog" style="background: #f8ffe6;">
           <div class="centered grid__col--9">
            
             <!-- Shared Workout -->
@@ -44,34 +44,12 @@
             </div>
           </div>
         </div>
-
-        <div class="polyriseblock hide notgrid bg-overlay3" style="box-shadow: rgba(99, 121, 207, 0) 0px 0px 0px 1600px inset; padding: 2em 0px; background-color: rgb(255, 255, 255);">
-          <div class="grid">
-            <div class="panel--centered centered grid__col--12">
-              <h1 style="margin-bottom: .5em; text-transform: uppercase;" class="editable">Share This Workout!</h1>
-
-              <div style="font-size: 3rem;">
-                <a href="javascript:void(0)" data-shareto="facebook" style="color: #4862A3;">
-                  <i class="fa fa-facebook"></i>
-                </a>
-                &nbsp;
-                <a href="javascript:void(0)" data-shareto="twitter" style="color: #1DA1F2;">
-                  <i class="fa fa-twitter"></i>
-                </a>
-                &nbsp;
-                <a href="javascript:void(0)" data-shareto="googleplus" style="color: #c7654f;">
-                  <i class="fa fa-google-plus"></i>
-                </a>
-                &nbsp;
-                <a href="javascript:void(0)" data-shareto="linkedin" style="color: #0077B5;">
-                  <i class="fa fa-linkedin"></i>
-                </a>
-              </div>
-            </div>
-          </div>
+        
+        <div class="hide" id="capture" style="padding: 10px; background: #f5da55;">
+          <h4 style="color: #000; ">Hello world!</h4>
         </div>
         
-        <div class="polyriseblock notgrid bg-overlay3" style="box-shadow: rgba(99, 121, 207, 0) 0px 0px 0px 1600px inset; padding: 2em 0px; background-color: rgb(51, 51, 51);">
+        <div class="polyriseblock notgrid bg-overlay3" style="box-shadow: rgba(99, 121, 207, 0) 0px 0px 0px 1600px inset; padding: 2em 0px; background-color: rgb(51, 51, 51);" data-html2canvas-ignore="true">
           <div class="grid">
             <div class="grid__col--12 tc">
               <a href="http://michaelsboost.github.io/" target="_blank">
@@ -100,7 +78,8 @@
     <script src="libraries/sweetalert2/sweetalert2.all.min.js"></script>
     <script src="libraries/shortcut/shortcut.js"></script>
     <script src="libraries/lity/lity.js"></script>
+    <script src="libraries/html2canvas/html2canvas.js"></script>
     <script src="js/jquery.scrollintoview.js"></script>
-    <script src="js/share.js"></script>
+    <script src="js/downloadlog.js"></script>
   </body>
 </html>

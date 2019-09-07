@@ -58,7 +58,7 @@ var counter = 0, countPause = 1, chosenDifficulty,
       $("[data-confirm=quitworkout]").removeClass("hide");
       $("[data-confirm=newworkout]").addClass("hide");
       $("[data-save=workoutlog]").addClass("hide");
-      $("[data-share=workoutlog]").addClass("hide");
+      $("[data-download=workoutlog]").addClass("hide");
       $("[data-display=finish]").addClass("hide");
       return false;
     },
@@ -280,13 +280,13 @@ shortcut.add("left", function() {
 
 // Save workout log hotkey
 shortcut.add("ctrl+e", function() {
-  if ($("[data-share=workoutlog]").is(":visible")) {
-    $("[data-share=workoutlog]").trigger("click");
+  if ($("[data-download=workoutlog]").is(":visible")) {
+    $("[data-download=workoutlog]").trigger("click");
   }
 });
 shortcut.add("meta+e", function() {
-  if ($("[data-share=workoutlog]").is(":visible")) {
-    $("[data-share=workoutlog]").trigger("click");
+  if ($("[data-download=workoutlog]").is(":visible")) {
+    $("[data-download=workoutlog]").trigger("click");
   }
 });
 
@@ -442,7 +442,7 @@ function startWorkout() {
       $("[data-display=finish]").removeClass("hide");
       $("[data-confirm=newworkout]").removeClass("hide");
       $("[data-save=workoutlog]").removeClass("hide");
-      $("[data-share=workoutlog]").removeClass("hide");
+      $("[data-download=workoutlog]").removeClass("hide");
       $("[data-confirm=quitworkout]").addClass("hide");
       $("[data-confirm=pauseworkout]").addClass("hide");
       $("[data-output=finish]").text(time);
@@ -502,7 +502,7 @@ $("[data-confirm=quitworkout]").click(function() {
       $("[data-display=finish]").removeClass("hide");
       $("[data-confirm=newworkout]").removeClass("hide");
       $("[data-save=workoutlog]").removeClass("hide");
-      $("[data-share=workoutlog]").removeClass("hide");
+      $("[data-download=workoutlog]").removeClass("hide");
       $(this).addClass("hide");
       $("[data-confirm=pauseworkout]").addClass("hide");
       $("[data-output=finish]").text(time);
@@ -573,16 +573,30 @@ $("[data-save=workoutlog]").click(function() {
 });
 
 // Share Workout Log To The Web
-$("[data-share=workoutlog]").click(function() {
+$("[data-download=workoutlog]").click(function() {
   workoutLog = $("[data-content=workoutlog]").text().trim().replace(/\s{2,}/gm,"\n").toString();
   workoutLog = workoutLog.replace(/\n/g,"\\n");
   workoutLog = workoutLog.replace(/ /g,"%20");
 
-  var link = document.createElement('a');
-//  link.href = "file:///Users/michael/Documents/GitHub/Michaels-Workout-App/share.html#" + workoutLog;
-  link.href = "http://michaelsboost.com/Michaels-Workout-App/share.html#" + workoutLog;
-  link.setAttribute('target', '_blank');
-  link.click();
+//  var link = document.createElement('a');
+//  link.href = "file:///Users/michael/Documents/GitHub/Michaels-Workout-App/downloadlog.html#" + workoutLog;
+//  link.href = "http://michaelsboost.com/Michaels-Workout-App/downloadlog.html#" + workoutLog;
+//  link.setAttribute('target', '_blank');
+//  link.click();
+  
+  // check if preview already exists
+  if ($("#preview").is(":visible")) {
+    $("#preview").remove();
+  }
+  
+  // initialize preview to download image
+  var frame = document.createElement("iframe");
+  frame.setAttribute("id", "preview");
+  frame.setAttribute("src", "file:///Users/michael/Documents/GitHub/Michaels-Workout-App/downloadlog.html#" + workoutLog);
+//  frame.setAttribute("src", "http://michaelsboost.com/Michaels-Workout-App/downloadlog.html#" + workoutLog);
+  frame.setAttribute("sandbox", "allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts");
+  document.body.appendChild(frame);
+  return false;
 });
 
 // Animate button on click

@@ -182,7 +182,7 @@
                 <li>
                   <input type="number" id="howmanyhours" name="workoutparameters" placeholder="How many hours?" min=".25" max="24" step=".25">
                 </li>
-                <li style="border: 0;">
+                <li class="autoheight" style="border: 0;">
                   <label class="tc">
                     Total <span data-calculate="reps">?</span> <span data-output="workouttype"></span> for <span data-calculate="totalmins"></span>
                   </label>
@@ -239,10 +239,10 @@
               <h1 class="center headline-primary--grouped" data-display="break">&nbsp;</h1>
               
               <button class="hide btn--info confirmdropdown fill" data-save="workoutlog" data-action="bounce" style="margin-left: 0;">
-                Save Workout Log
+                Download Workout Log (.txt)
               </button>
-              <button class="hide btn--info confirmdropdown fill" data-share="workoutlog" data-action="bounce" style="margin-left: 0; background-color: #6bb9d2;">
-                Share Workout Log
+              <button class="hide btn--info confirmdropdown fill" data-download="workoutlog" data-action="bounce" style="margin-left: 0; background-color: #6bb9d2;">
+                Download Workout Log (.png)
               </button>
               <button class="hide btn--info fill" data-confirm="newworkout" data-action="bounce" style="margin-left: 0;">
                 New Workout

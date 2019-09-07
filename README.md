@@ -21,11 +21,6 @@ Then Execute!
 ![](https://raw.githubusercontent.com/michaelsboost/Michaels-Workout-App/gh-pages/screenshot4.png)
 ![](https://raw.githubusercontent.com/michaelsboost/Michaels-Workout-App/gh-pages/screenshot5.png)
 
-Share Your Workout!
--------------
-
-![](https://raw.githubusercontent.com/michaelsboost/Michaels-Workout-App/gh-pages/screenshot6.png)
-
 [Want to know what the saved file of your workout log looks like?](https://github.com/michaelsboost/Michaels-Workout-App/blob/gh-pages/workout_log%209_6_2019%205_38_53%20AM.txt)
 -------------
 
@@ -48,10 +43,10 @@ Hotkeys
 * Escape - Initialize new workout
 * Spacebar - Pause/Resume workout
 * Spacebar - Initialize new workout
-* Ctrl+S - Save workout log as text file  
-* Cmd+S  - Save workout log as text file on mac  
-* Ctrl+E - Share workout log  
-* Cmd+E  - Share workout log on mac  
+* Ctrl+S - Save workout log (.txt)   
+* Cmd+S  - Save workout log (.txt) on mac  
+* Ctrl+E - Download workout log (.png)  
+* Cmd+E  - Download workout log (.png) on mac  
 * Ctrl+N - Initialize new workout  
 
 Tech

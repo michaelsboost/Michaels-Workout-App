@@ -1,11 +1,22 @@
 // Variables
-var str, startTime,
+var str, startTime, imageURL, first, next,
     testString = "Date: 9:6:2019\nStart time: 3:10:57 PM\nObjective: 17 pushups a minute for 1 hour\nGoal: 1020 pushups in 1 hour\nCompleted: 1020 pushups\n60 minutes have gone by\n0 pushups remaining\n0 minutes remaining\nTimes Paused: 0\nFinished at: 4:10:56 PM",
     site         = window.location,
     openInNewTab = function(url) {
+      str = window.location.hash;
+      str = str.substr(1, str.length);
+      str = str.replace(/%20/g, " ");
+
+      startTime = str.substring(0, str.indexOf('\\n'));
+      first = str.indexOf('\\n');
+      next  = str.indexOf('\\n', first + 1);
+      dateTime  = startTime.replace(/Date: /g, "");
+      startTime = str.substring(str.indexOf('Finished at: '));
+      startTime  = startTime.replace(/Finished at: /g, "");
+
       var a = document.createElement("a");
-      a.target = "_blank";
       a.href = url;
+      a.download = "workout_log " + dateTime + " " + startTime;
       a.click();
     };
 
@@ -54,21 +65,14 @@ if (window.location.hash) {
 //  window.location.href = "./index.html";
 }
 
-// Share This Workout
-$("[data-shareTo]").on("click", function() {
-  var thisAttr = $(this).attr("data-shareTo").toLowerCase();
+html2canvas(document.querySelector(".grablog")).then(function(canvas) {
+  canvas.id = "thecanvas";
+  canvas.className = "hide";
+  myCanvas = document.getElementById("thecanvas");
+  imageURL = canvas.toDataURL();
+  openInNewTab(imageURL);
   
-  if (thisAttr === "facebook") {
-    openInNewTab("https://www.facebook.com/sharer/sharer.php?u=" + site);
-  } else if (thisAttr === "twitter") {
-    openInNewTab("https://twitter.com/home?status=" + site);
-  } else if (thisAttr === "googleplus") {
-    openInNewTab("https://plus.google.com/share?url=" + site);
-  } else if (thisAttr === "linkedin") {
-    openInNewTab("https://www.linkedin.com/shareArticle?mini=true&url=" + site + "&title=&summary=&source=");
-  } else {
-    alertify.error("Unable to share, undetected social network");
-  }
+  document.body.appendChild(canvas);
 });
 
 // Animate button on click

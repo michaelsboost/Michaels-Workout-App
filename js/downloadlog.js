@@ -65,16 +65,11 @@ if (window.location.hash) {
 //  window.location.href = "./index.html";
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  html2canvas(document.querySelector(".grablog")).then(function(canvas) {
-    canvas.id = "thecanvas";
-    canvas.className = "hide";
-    myCanvas = document.getElementById("thecanvas");
-    imageURL = canvas.toDataURL();
-    openInNewTab(imageURL);
-
-    document.body.appendChild(canvas);
-  });
+// convert website to image
+html2canvas(document.querySelector(".grablog")).then(function(canvas) {
+  // download canvas image
+  imageURL = canvas.toDataURL();
+  openInNewTab(imageURL);
 });
 
 // Animate button on click

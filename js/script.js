@@ -580,7 +580,7 @@ $("[data-download=workoutlog]").click(function() {
 
 //  var link = document.createElement('a');
 //  link.href = "file:///Users/michael/Documents/GitHub/Michaels-Workout-App/downloadlog.html#" + workoutLog;
-//  link.href = "http://michaelsboost.com/Michaels-Workout-App/downloadlog.html#" + workoutLog;
+//  link.href = "https://michaelsboost.com/Michaels-Workout-App/downloadlog.html#" + workoutLog;
 //  link.setAttribute('target', '_blank');
 //  link.click();
   
@@ -593,7 +593,7 @@ $("[data-download=workoutlog]").click(function() {
   var frame = document.createElement("iframe");
   frame.setAttribute("id", "preview");
 //  frame.setAttribute("src", "file:///Users/michael/Documents/GitHub/Michaels-Workout-App/downloadlog.html#" + workoutLog);
-  frame.setAttribute("src", "//michaelsboost.com/Michaels-Workout-App/downloadlog.html#" + workoutLog);
+  frame.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/downloadlog.html#" + workoutLog);
   frame.setAttribute("sandbox", "allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts");
   document.body.appendChild(frame);
   return false;

@@ -15,17 +15,22 @@ html, body {
 }
 
 /* Main */
-.disclaimer, .randomize {
+.disclaimer, .randomize, .nutritionplan {
   position: absolute;
-  top: 0;
   padding: 16px;
   z-index: 1;
 }
-.disclaimer {
+.disclaimer, .randomize {
+  top: 0;
+}
+.disclaimer, .nutritionplan {
   left: 0;
 }
 .randomize {
   right: 0;
+}
+.nutritionplan {
+  top: 60px;
 }
 .clock {
   font-family: 'Orbitron', sans-serif;
@@ -48,7 +53,7 @@ html, body {
   display: table;
   width: 100%;
   height: calc(100% - 87px);
-  margin-top: 20px;
+  padding-top: 20px;
 }
 .cell {
   display: table-cell;

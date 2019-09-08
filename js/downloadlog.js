@@ -47,7 +47,7 @@ if (window.location.hash) {
     site = "https%3A//" + site.substring(8, site.length);
   } else {
     // cannot detect http encoding revert to domain as default
-    site = "https%3A//michaelsboost.github.io/Michaels-Workout-App/share/" + window.location.hash;
+    site = window.location + "downloadlog.html" + window.location.hash;
   }
   
   // Grab the hash
@@ -57,21 +57,21 @@ if (window.location.hash) {
   
   startTime = str.substring(0, str.indexOf('\\n'));
   startTime = startTime.replace(/Date: /g, "");
-  document.title = "Shared Workout Log: " + startTime;
+  document.title = "Download Workout Log: " + startTime;
 
   // Display in workout log
   $("[data-output=workoutlog]").html(str.replace(/\\n/g, "<br>"));
+    
+  // convert website to image
+  html2canvas(grablog).then(function(canvas) {
+    // download canvas image
+    imageURL = canvas.toDataURL();
+    openInNewTab(imageURL);
+  });
 } else {
   // No hash? Then initialize new workout
-//  window.location.href = "./index.html";
+  // window.location.href = "./index.html";
 }
-
-// convert website to image
-html2canvas(grablog).then(function(canvas) {
-  // download canvas image
-  imageURL = canvas.toDataURL();
-  openInNewTab(imageURL);
-});
 
 // Animate button on click
 $("[data-action=bounce]").on("click", function() {

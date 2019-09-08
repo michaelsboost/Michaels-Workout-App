@@ -469,7 +469,6 @@ function abortWorkout() {
   countPause = 1;
   workoutStatus = "waiting";
   $("[data-display=break]").html("&nbsp;");
-  $("[data-action=randomize]").fadeIn(250);
   clearTimeout(runTimer);
   abortSound();
 }

@@ -62,9 +62,6 @@
   <preference name="phonegap-version" value="cli-9.0.0" />
   <preference name="android-minSdkVersion" value="14" />
   <preference name="android-targetSdkVersion" value="28" />
-
-  <gap:plugin name="org.apache.cordova.file"/>
-  <gap:plugin name="org.apache.cordova.file-transfer"/>
   <preference name="AndroidPersistentFileLocation" value="Compatibility" />
 
   <allow-intent href="http://*/*"/>

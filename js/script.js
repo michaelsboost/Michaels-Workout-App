@@ -620,6 +620,8 @@ $("[data-download=workoutlog]").click(function() {
   // update site variable
   if (site.substring(0, site.indexOf('index.html'))) {
     site = site.replace(/index.html/g, "downloadlog.html");
+  } else if (site.substring(0, site.indexOf('downloadlog.html'))) {
+    // leave it's fine
   } else {
     site = site + "downloadlog.html";
   }

@@ -120,11 +120,6 @@ $("a[data-lity]").on("click", function() {
   }
 });
 
-// open all links in default web browser
-$("a[target=_blank]").on("click", function() {
-  window.open(this.href, '_system');
-});
-
 // Randomize Workout
 $("[data-action=randomize]").click(function() {
   if ($("[data-display=typeofworkout]").is(":visible")) {

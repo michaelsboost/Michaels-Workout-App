@@ -15,10 +15,18 @@ var str, startTime, imageURL, first, next,
       startTime = str.substring(str.indexOf('Finished at: '));
       startTime  = startTime.replace(/Finished at: /g, "");
 
+      var img = new Image();
+      img.crossOrigin = "Anonymous";
+      img.id = "getshot";
+      img.className = "hide";
+      img.src = url;
+      document.body.appendChild(img);
+      
       var a = document.createElement("a");
-      a.href = url;
+      a.href = getshot.src;
       a.download = "workout_log " + dateTime + " " + startTime;
       a.click();
+      document.body.removeChild(getshot);
     };
 
 // Disclaimer
@@ -66,8 +74,8 @@ if (window.location.hash) {
   // convert website to image
   html2canvas(grablog).then(function(canvas) {
     // download canvas image
-    imageURL = canvas.toDataURL();
-    openInNewTab(imageURL);
+    myBase64 = canvas.toDataURL("image/png");
+    openInNewTab(myBase64);
   });
 } else {
   // No hash? Then initialize new workout

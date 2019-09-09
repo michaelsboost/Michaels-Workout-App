@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget xmlns = "http://www.w3.org/ns/widgets"
   xmlns:gap   = "http://phonegap.com/ns/1.0"
-  id          = "com.webdgap.michael'sworkoutapp"
+  id          = "com.michael.workoutapp"
   version     = "0.1"
   versionCode = "1">
   <name>Michael's Workout App</name>
@@ -52,10 +52,11 @@
   <preference name="stay-in-webview" value="false"/>
   <preference name="ios-statusbarstyle" value="black-opaque"/>
 
-  <gap:plugin name="cordova-plugin-inappbrowser" source="npm"/>
-  <gap:plugin name="cordova-plugin-network-information" source="npm"/>
-
   <access origin="*"/>
+  <gap:plugin name="cordova-plugin-file" source="npm" spec="~4.1.1" />
+  <gap:plugin name="cordova-plugin-file-transfer" source="npm" spec="~1.5.0" />
+  <gap:plugin name="cordova-plugin-inappbrowser" source="npm" spec="~1.3.0" />
+  <gap:plugin name="cordova-plugin-network-information" source="npm" spec="~1.2.0" />
   <gap:plugin name="cordova-plugin-whitelist" source="npm"/>
 
   <preference name="phonegap-version" value="cli-9.0.0" />

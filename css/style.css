@@ -11,49 +11,50 @@ html, body {
   padding: 0;
   height: 100%;
   background: #f8ffe6;
-  overflow: auto;
 }
 
 /* Main */
-.disclaimer, .randomize, .nutritionplan {
+.leftbtns h1, .rightbtns h1 {
+  padding: 16px 16px 0 16px;
+}
+.leftbtns, .rightbtns {
   position: absolute;
-  padding: 16px;
-  z-index: 1;
-}
-.disclaimer, .randomize {
   top: 0;
+  z-index: 2;
 }
-.disclaimer, .nutritionplan {
+.leftbtns {
   left: 0;
 }
-.randomize {
+.rightbtns {
   right: 0;
-}
-.nutritionplan {
-  top: 60px;
 }
 .clock {
   font-family: 'Orbitron', sans-serif;
   font-size: 4em;
 }
 #preview {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  padding: 0;
+  min-width: 1280px;
+  width: auto;
+  z-index: 0;
+}
+.logoheader {
+  width: 30%;
   margin: 0;
-  visibility: hidden;
+  border-radius: 100%;
 }
 
 /* Center vertically and horizontally */
 .table {
+  position: relative;
   display: table;
   width: 100%;
   height: calc(100% - 87px);
   padding-top: 20px;
+  z-index: 1;
+  background: #f8ffe6
 }
 .cell {
   display: table-cell;

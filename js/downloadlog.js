@@ -60,7 +60,8 @@ if (window.location.hash) {
   document.title = "Download Workout Log: " + startTime;
 
   // Display in workout log
-  $("[data-output=workoutlog]").html(str.replace(/\\n/g, "<br>"));
+  workoutLog = str.replace(/\\n/g, "<br>");
+  $("[data-output=workoutlog]").html(workoutLog + "<br><br>Try a workout at: https://michaelsboost.com/workout");
     
   // convert website to image
   html2canvas(grablog).then(function(canvas) {

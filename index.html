@@ -26,28 +26,41 @@
     <script src="libraries/filesaver/Blob.js"></script>
   </head>
   <body class="tc">
-    <!-- Disclaimer -->
-    <h1 class="pointer headline-primary--grouped disclaimer" data-action="disclaimer" title="Disclaimer">
-      <i class="fa fa-exclamation-circle"></i>
-    </h1>
+    <!-- Buttons on left side -->
+    <div class="leftbtns">
+      <!-- Disclaimer -->
+      <h1 class="pointer headline-primary--grouped" data-action="disclaimer" title="Disclaimer">
+        <i class="fa fa-exclamation-circle"></i>
+      </h1>
+      
+      <!-- Nutrition Plan -->
+      <h1 class="pointer headline-primary--grouped" title="Nutrition Plan">
+        <a href="https://us.lazarangelov.diet/" target="_blank">
+          <i class="fa fa-cutlery"></i>
+        </a>
+      </h1>
+    </div>
     
-    <!-- Nutrition Plan -->
-    <h1 class="pointer headline-primary--grouped nutritionplan" title="Nutrition Plan">
-      <a href="https://us.lazarangelov.diet/" target="_blank">
-        <i class="fa fa-cutlery"></i>
-      </a>
-    </h1>
+    <!-- Buttons on right side -->
+    <div class="rightbtns">
+      <!-- Give me a Random Challenge -->
+      <h1 class="pointer headline-primary--grouped" data-action="randomize" title="Randomize">
+        <i class="fa fa-refresh"></i>
+      </h1>
+      
+      <!-- Donate Button -->
+      <h1 class="pointer headline-primary--grouped" data-action="donate" title="Donate">
+        <a href="http://michaelsboost.github.io/donate" target="_blank">
+          <i class="fa fa-dollar"></i>
+        </a>
+      </h1>
+    </div>
     
-    <!-- Give me a Random Challenge -->
-    <h1 class="pointer headline-primary--grouped randomize" data-action="randomize" title="Randomize">
-      <i class="fa fa-refresh"></i>
-    </h1>
-    
-    <!-- Centered Game Area -->
+    <!-- Centered Plan Area -->
     <div class="table">
       <div class="cell">
         <div class="grid" data-display="grid">
-          <div class="centered grid__col--9">
+          <div class="centered grid__col--9" style="background: #f8ffe6;">
 
             <!-- Type of Workout -->
             <div class="selectdropdowns typeofworkout" data-display="typeofworkout">
@@ -282,12 +295,12 @@
       </div>
     </div>
 
+    <script src="js/detecthttp.js"></script>
     <script src="libraries/alertifyjs/alertify.min.js"></script>
     <script src="libraries/sweetalert2/sweetalert2.all.min.js"></script>
     <script src="libraries/shortcut/shortcut.js"></script>
     <script src="libraries/lity/lity.js"></script>
     <script src="js/jquery.scrollintoview.js"></script>
-    <script src="js/detecthttp.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>

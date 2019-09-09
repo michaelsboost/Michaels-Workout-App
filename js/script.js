@@ -7,6 +7,7 @@ var counter = 0, countPause = 1, chosenDifficulty,
     fileSaved = "nope", workoutStatus = "waiting", nextInput,
     audioElement    = document.createElement("audio"),
     audioElement2   = document.createElement("audio"),
+    grablog         = document.querySelector(".grablog"),
     site            = window.location.toString(),
     goSound         = function() {
       audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/go.mp3");
@@ -71,6 +72,25 @@ var counter = 0, countPause = 1, chosenDifficulty,
           // highlight the element so user's focus gets where it needs to be
         }
       });
+    },
+    openInNewTab    = function(url) {
+      str = $("[data-content=workoutlog]").text().trim().replace(/\s{2,}/gm,"<br>").toString();
+
+      startTime = str.substring(0, str.indexOf('\\n'));
+      first = str.indexOf('\\n');
+      next  = str.indexOf('\\n', first + 1);
+      dateTime  = startTime.replace(/Date: /g, "");
+      startTime = str.substring(str.indexOf('Finished at: '));
+      startTime = startTime.replace(/Finished at: /g, "");
+      
+      today = new Date();
+      saveDate = today.getMonth() + 1 + "_" + today.getDate() + "_" + today.getFullYear();
+      dateTime = saveDate + " " + $("[data-output=finish]").text().replace(/:/g, "_");
+
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "workout_log " + dateTime + " " + startTime;
+      a.click();
     };
 
 // Disclaimer
@@ -78,8 +98,8 @@ $("[data-action=disclaimer]").click(function() {
   var msg1 = "I Michael Schwartz developed this workout app for myself and myself only!\n\n",
       msg2 = "I am not held liable if you do any of the workouts listed in this app!\n\n",
       msg3 = "By using this app you agree that you're doing these workouts by your own discression only!<br><br>",
-      msg4 = "Contribution and Source Code: <br><a href='https://github.com/michaelsboost/Michaels-Workout-App/' target='_blank'>https://github.com/michaelsboost/Michaels-Workout-App/</a>";
-      
+      msg4 = "Contribution and Source Code: <br><a href=\"javascript:window.open('https://github.com/michaelsboost/Michaels-Workout-App/', '_system')\">https://github.com/michaelsboost/Michaels-Workout-App/</a>";
+
   Swal.fire({
     title: "Disclaimer",
     html: msg1 + msg2 + msg3 + msg4,
@@ -93,11 +113,16 @@ $("a[data-lity]").on("click", function() {
     alertify.error("Can't play video: No internet connection!'");
     return false;
   }
-  
+
   if ($(this).attr("data-check") === "comingsoon") {
     alertify.log("coming soon...");
     return false;
   }
+});
+
+// open all links in default web browser
+$("a[target=_blank]").on("click", function() {
+  window.open(this.href, '_system');
 });
 
 // Randomize Workout
@@ -135,7 +160,7 @@ window.onkeydown = function(e) {
       }
     }
   }
-  
+
   // Workout parameters enter and escape keys
   if ($("[data-display=workoutparameters]").is(":visible")) {
     // Use escape key to go back to workout parameters
@@ -143,14 +168,14 @@ window.onkeydown = function(e) {
       $("[data-confirm=backtoworkout]").trigger("click");
       return false;
     }
-    
+
     // Use enter key to confirm workout parameters
     if (e.keyCode == 13 && e.target == document.body) {
       $("[data-confirm=workoutparameters]").trigger("click");
       return false;
     }
   }
-  
+
   // Workout Start/Pause and Quit hotkeys
   if ($("[data-display=startworkout]").is(":visible")) {
     if ($("[data-confirm=quitworkout]").is(":visible")) {
@@ -160,7 +185,7 @@ window.onkeydown = function(e) {
         return false;
       }
     }
-    
+
     // Use spacebar to toggle start/pause workout
     if ($("[data-confirm=pauseworkout]").is(":visible")) {
       if (workoutStatus === "running" || workoutStatus === "paused") {
@@ -192,13 +217,13 @@ shortcut.add("down", function() {
     if ($("input[name=workoutGroup]").is(":checked")) {
       if ($("input[name=workoutGroup]:last").is(":checked")) {
         $("[data-display=typeofworkout] input:first").prop("checked", true).trigger("click");
-        
+
         // Scroll to selected workout
         scrollToView($("[data-display=typeofworkout] input:checked").parent());
       } else {
         nextInput = $("[data-display=typeofworkout] input:checked").parent().next().children().filter("input").attr("id");
         $("[data-display=typeofworkout] #"+ nextInput).prop("checked", true).trigger("click");
-        
+
         // Scroll to selected workout
         scrollToView($("[data-display=typeofworkout] input:checked").parent());
       }
@@ -218,13 +243,13 @@ shortcut.add("right", function() {
     if ($("input[name=workoutGroup]").is(":checked")) {
       if ($("input[name=workoutGroup]:last").is(":checked")) {
         $("[data-display=typeofworkout] input:first").prop("checked", true).trigger("click");
-        
+
         // Scroll to selected workout
         scrollToView($("[data-display=typeofworkout] input:checked").parent());
       } else {
         nextInput = $("[data-display=typeofworkout] input:checked").parent().next().children().filter("input").attr("id");
         $("[data-display=typeofworkout] #"+ nextInput).prop("checked", true).trigger("click");
-        
+
         // Scroll to selected workout
         scrollToView($("[data-display=typeofworkout] input:checked").parent());
       }
@@ -244,13 +269,13 @@ shortcut.add("up", function() {
     if ($("input[name=workoutGroup]").is(":checked")) {
       if ($("input[name=workoutGroup]:first").is(":checked")) {
         $("[data-display=typeofworkout] input:last").prop("checked", true).trigger("click");
-        
+
         // Scroll to selected workout
         scrollToView($("[data-display=typeofworkout] input:checked").parent());
       } else {
         nextInput = $("[data-display=typeofworkout] input:checked").parent().prev().children().filter("input").attr("id");
         $("[data-display=typeofworkout] #"+ nextInput).prop("checked", true).trigger("click");
-        
+
         // Scroll to selected workout
         scrollToView($("[data-display=typeofworkout] input:checked").parent());
       }
@@ -270,13 +295,13 @@ shortcut.add("left", function() {
     if ($("input[name=workoutGroup]").is(":checked")) {
       if ($("input[name=workoutGroup]:first").is(":checked")) {
         $("[data-display=typeofworkout] input:last").prop("checked", true).trigger("click");
-        
+
         // Scroll to selected workout
         scrollToView($("[data-display=typeofworkout] input:checked").parent());
       } else {
         nextInput = $("[data-display=typeofworkout] input:checked").parent().prev().children().filter("input").attr("id");
         $("[data-display=typeofworkout] #"+ nextInput).prop("checked", true).trigger("click");
-        
+
         // Scroll to selected workout
         scrollToView($("[data-display=typeofworkout] input:checked").parent());
       }
@@ -327,7 +352,7 @@ shortcut.add("ctrl+n", function() {
 $("[data-confirm=backtoworkout]").click(function() {
   $("[data-display=workoutparameters]").fadeOut(250);
   $("[data-display=typeofworkout]").fadeIn(250);
-  
+
   // Remove input focus
   if ($("#repspermin").is(":focus")) {
     repspermin.blur();
@@ -345,7 +370,7 @@ $("[data-confirm=typeofworkout]").click(function(e) {
   } else {
     $("[data-display=typeofworkout]").fadeOut(250);
     $("[data-display=workoutparameters]").fadeIn(250);
-    
+
     // check if repspermin or howmanyhours already has a value for focus
     if (!repspermin.value) {
       repspermin.focus();
@@ -354,7 +379,7 @@ $("[data-confirm=typeofworkout]").click(function(e) {
     } else {
       repspermin.focus();
     }
-    
+
     chosenWorkoutType = $("[data-display=typeofworkout] input:checked").attr("id");
     selectedWorkoutType = $("[data-display=typeofworkout] label[for="+ chosenWorkoutType +"]").text()
     $("[data-output=workouttype]").text( selectedWorkoutType );
@@ -367,21 +392,21 @@ $("#repspermin, #howmanyhours").on("keyup change", function() {
   // 1 hour = 60mins = 60 × 60secs = 3600secs = 3600 × 1000ms = 3,600,000
   // 60000ms in a minute
   // 60mins in an hour
-  
+
   // This function is called every minute
   // multiply by 4 for hour many pullups per min
   // 4*120 = 480 pullups every min for 2 hours
-  
+
   totalhours    = howmanyhours.value;
   pullupspermin = repspermin.value;
-  
+
   if (repspermin.value && howmanyhours.value) {
     $("[data-confirm=workoutparameters]").show();
     $("[data-calculate=reps], [data-calculate=goal]").text(totalhours * 60 * pullupspermin);
   } else {
     $("[data-confirm=workoutparameters]").hide();
   }
-  
+
   $("[data-count=minutesleft]").text(howmanyhours.value * 60 + " minutes");
   $("[data-calculate=totalmins]").text($("[data-count=minutesleft]").text());
 }).on("keydown", function(e) {
@@ -389,21 +414,21 @@ $("#repspermin, #howmanyhours").on("keyup change", function() {
   if (e.which === 27) {
     $("[data-confirm=backtoworkout]").trigger("click");
   }
-  
+
   // Only if repspermin has value focus on howmanyhours
   if (repspermin.value && !howmanyhours.value) {
     if (e.which === 13) {
       howmanyhours.focus();
     }
   }
-  
+
   // Only if howmanyhours has value focus on repspermin
   if (!repspermin.value && howmanyhours.value) {
     if (e.which === 13) {
       repspermin.focus();
     }
   }
-  
+
   // if both have a valye confirm parameters via enter key
   if (repspermin.value && howmanyhours.value) {
     if (e.which === 13) {
@@ -417,23 +442,23 @@ function startWorkout() {
   ahora = new Date();
   tiempo = ahora.toLocaleTimeString();
   $("[data-output=starttime]").text(tiempo);
-  
+
   today = new Date();
   saveDate = today.getMonth() + 1 + ":" + today.getDate() + ":" + today.getFullYear();
   $("[data-output=startdate]").text(saveDate);
-  
+
   $("[data-output=repspermin]").text(repspermin.value);
   if (howmanyhours.value <= "1") {
     $("[data-output=howmanyhours]").text(howmanyhours.value + " hour");
   } else {
     $("[data-output=howmanyhours]").text(howmanyhours.value + " hours");
   }
-  
+
   runTimer = setInterval(function() {
     // Display how many minutes have gone by
     $("[data-count=minutes]").text(counter++);
     minLeft  = $("[data-count=minutes]").text() - 0;
-    
+
     if (minLeft === 1) {
       $("[data-count=minutes]").text(minLeft + " minute has");
       $("[data-count=minutesleft]").text(howmanyhours.value * 60 - minLeft + " minute");
@@ -441,13 +466,13 @@ function startWorkout() {
       $("[data-count=minutes]").text(minLeft + " minutes have");
       $("[data-count=minutesleft]").text(howmanyhours.value * 60 - minLeft + " minutes");
     }
-    
+
     // Count how many reps
     $("[data-count=reps]").text(parseInt(repspermin.value * counter - repspermin.value));
-    
+
     // Count how many reps left to do
     $("[data-countdown=reps]").text(parseInt($("[data-calculate=reps]").text() - $("[data-count=reps]").text()));
-    
+
     // Let the user know every minute when to execute workout
     goSound();
 
@@ -486,7 +511,7 @@ displayTime();
 $("[data-confirm=workoutparameters]").click(function() {
   workoutStatus = "running";
   counter = 1;
-  
+
   totalhours    = howmanyhours.value;
   pullupspermin = repspermin.value;
   $("[data-display=workoutparameters]").fadeOut(250);
@@ -529,7 +554,7 @@ $("[data-confirm=quitworkout]").click(function() {
 $("[data-confirm=pauseworkout]").click(function() {
   if (workoutStatus === "running") {
     workoutStatus = "paused";
-    
+
     this.textContent = "Resume Workout";
     clearTimeout(runTimer);
     runTimer = 0;
@@ -575,27 +600,22 @@ $("[data-save=workoutlog]").click(function() {
   // User is saving workout log
   // Updating variable so user isn't prompted upon new workout
   fileSaved = "saved";
-  
+
   today = new Date();
   saveDate = today.getMonth() + 1 + "_" + today.getDate() + "_" + today.getFullYear();
-  dateTime = saveDate + " " + $("[data-output=finish]").text();
-  
+  dateTime = saveDate + " " + $("[data-output=finish]").text().replace(/:/g, "_");;
+
   workoutLog = $("[data-content=workoutlog]").text().trim().replace(/\s{2,}/gm,"\n").toString();
+  workoutLog = workoutLog + "\n\nTry a workout at: https://michaelsboost.com/workout";
   blob = new Blob([ workoutLog ], {type: "text/plain"});
   saveAs(blob, "workout_log " + dateTime + ".txt");
 });
 
-// Share Workout Log To The Web
+// Download Workout Log As Image
 $("[data-download=workoutlog]").click(function() {
   workoutLog = $("[data-content=workoutlog]").text().trim().replace(/\s{2,}/gm,"\n").toString();
   workoutLog = workoutLog.replace(/\n/g,"\\n");
   workoutLog = workoutLog.replace(/ /g,"%20");
-
-//  var link = document.createElement('a');
-//  link.href = "file:///Users/michael/Documents/GitHub/Michaels-Workout-App/downloadlog.html#" + workoutLog;
-//  link.href = "https://michaelsboost.com/Michaels-Workout-App/downloadlog.html#" + workoutLog;
-//  link.setAttribute('target', '_blank');
-//  link.click();
   
   // check if preview already exists
   if ($("#preview").is(":visible")) {

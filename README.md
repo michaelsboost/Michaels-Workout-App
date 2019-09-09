@@ -21,8 +21,8 @@ Then Execute!
 ![](https://raw.githubusercontent.com/michaelsboost/Michaels-Workout-App/gh-pages/screenshot4.png)
 ![](https://raw.githubusercontent.com/michaelsboost/Michaels-Workout-App/gh-pages/screenshot5.png)
 
-[See the saved Text (.txt) workout log](https://github.com/michaelsboost/Michaels-Workout-App/blob/gh-pages/workout_log%209_6_2019%205_38_53%20PM.txt)  
-[See the saved Image (.png) workout log](https://github.com/michaelsboost/Michaels-Workout-App/blob/gh-pages/workout_log%209_6_2019%205_38_53%20PM.png)
+[See the saved workout log (.txt)](https://github.com/michaelsboost/Michaels-Workout-App/blob/gh-pages/workout_log%209_6_2019%205_38_53%20PM.txt)  
+[See the saved workout log (.png)](https://github.com/michaelsboost/Michaels-Workout-App/blob/gh-pages/workout_log%209_6_2019%205_38_53%20PM.png)
 -------------
 
 Version

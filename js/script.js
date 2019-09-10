@@ -62,9 +62,6 @@ var counter = 0, countPause = 1, chosenDifficulty,
       a.click();
     };
 
-// Scroll to top
-$("html, body").scrollTop(0);
-
 // Disclaimer
 $("[data-action=disclaimer]").click(function() {
   var msg1 = "I Michael Schwartz developed this workout app for myself and myself only!\n\n",
@@ -544,6 +541,7 @@ $("[data-confirm=pauseworkout]").click(function() {
 $("[data-confirm=newworkout]").click(function() {
   // Detect if user saved workout or not
   if (fileSaved === "saved") {
+    window.scrollTo(0, 0);
     location.reload(true);
   } else {
     Swal.fire({
@@ -556,6 +554,7 @@ $("[data-confirm=newworkout]").click(function() {
       confirmButtonText: 'Yes!'
     }).then((result) => {
       if (result.value) {
+        window.scrollTo(0, 0);
         location.reload(true);
       }
     });

@@ -2,8 +2,8 @@
 <widget xmlns = "http://www.w3.org/ns/widgets"
   xmlns:gap   = "http://phonegap.com/ns/1.0"
   id          = "com.michael.workoutapp"
-  version     = "0.1"
-  versionCode = "1">
+  version     = "0.2"
+  versionCode = "2">
   <name>Michael's Workout App</name>
   <description>
     A new way to challenge yourself in the gym!

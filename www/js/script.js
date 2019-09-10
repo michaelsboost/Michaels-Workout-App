@@ -32,38 +32,6 @@ var counter = 0, countPause = 1, chosenDifficulty,
       audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/complete.mp3");
       audioElement.play();
     },
-    newWorkout      = function() {
-      // Make sure timer has already been stopped
-      clearTimeout(runTimer);
-      
-      // Reset to no file saved for new workout log
-      fileSaved = "nope";
-      
-      // Reset workout status to waiting
-      workoutStatus = "waiting";
-      
-      // Reset text
-      counter = 0;
-      countPause = 0;
-      totalhours    = howmanyhours.value;
-      pullupspermin = repspermin.value;
-      $("[data-count=reps]").text(pullupspermin);
-      $("[data-countdown=reps]").text(totalhours * 60 * pullupspermin);
-      $("[data-count=minutes], [data-output=paused]").text("0");
-      $("[data-output=workoutlog]").html("");
-
-      // Allow user to reset inputs
-      $("[data-action=randomize]").fadeIn(250);
-      $("[data-display=typeofworkout]").fadeIn(250);
-      $("[data-display=startworkout]").fadeOut(250);
-      $("[data-confirm=pauseworkout]").removeClass("hide");
-      $("[data-confirm=quitworkout]").removeClass("hide");
-      $("[data-confirm=newworkout]").addClass("hide");
-      $("[data-save=workoutlog]").addClass("hide");
-      $("[data-download=workoutlog]").addClass("hide");
-      $("[data-display=finish]").addClass("hide");
-      return false;
-    },
     scrollToView    = function(el) {
       el.scrollintoview({
         duration: "fast",
@@ -170,7 +138,7 @@ function savebase64AsImageFile(filename,content,contentType) {
 }
 
 // Check if Android Device is Ready
-document.addEventListener("deviceready", function() {
+function deviceReady() {
   // Disclaimer
   $("[data-action=disclaimer]").click(function() {
     var msg1 = "I Michael Schwartz developed this workout app for myself and myself only!\n\n",
@@ -655,7 +623,7 @@ document.addEventListener("deviceready", function() {
   $("[data-confirm=newworkout]").click(function() {
     // Detect if user saved workout or not
     if (fileSaved === "saved") {
-      newWorkout();
+      location.reload(true);
     } else {
       Swal.fire({
         title: "You haven't saved your workout!",
@@ -667,7 +635,7 @@ document.addEventListener("deviceready", function() {
         confirmButtonText: 'Yes!'
       }).then((result) => {
         if (result.value) {
-          newWorkout();
+          location.reload(true);
         }
       });
     }
@@ -699,9 +667,8 @@ document.addEventListener("deviceready", function() {
     // convert website to image
     html2canvas(grablog).then(function(canvas) {
       /** Process the type1 base64 string **/
-      var myBase64 = canvas.toDataURL();
-      // document.body.appendChild(canvas);
-
+      var myBase64 = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+      
       // Split the base64 string in data and contentType
       var block = myBase64.split(";");
       // Get the content type
@@ -732,4 +699,6 @@ document.addEventListener("deviceready", function() {
              .animate({marginTop: '+='+distance},speed);
     }        
   }
-}, false);
+};
+//document.addEventListener("DOMContentLoaded", deviceReady, false);
+document.addEventListener("deviceready", deviceReady, false);

@@ -57,7 +57,8 @@ var counter = 0, countPause = 1, chosenDifficulty,
 
       var a = document.createElement("a");
       a.href = url;
-      a.download = "workout_log " + dateTime + " " + startTime;
+      a.target = "_blank";
+      // a.download = "workout_log " + dateTime + " " + startTime;
       a.click();
     };
 
@@ -598,12 +599,17 @@ $("[data-download=workoutlog]").click(function() {
   }
   
   // initialize preview to download image
-  var frame = document.createElement("iframe");
-  frame.setAttribute("id", "preview");
-  frame.setAttribute("src", site + "#" + workoutLog);
-  frame.setAttribute("sandbox", "allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-downloads-without-user-activation");
-  document.body.appendChild(frame);
-  return false;
+  var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+  if (iOS === true) {
+    openInNewTab(site + "#" + workoutLog);
+  } else {
+    var frame = document.createElement("iframe");
+    frame.setAttribute("id", "preview");
+    frame.setAttribute("src", site + "#" + workoutLog);
+    frame.setAttribute("sandbox", "allow-forms allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-downloads-without-user-activation");
+    document.body.appendChild(frame);
+  }
+return false;
 });
 
 // Animate button on click

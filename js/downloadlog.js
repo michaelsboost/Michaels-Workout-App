@@ -23,18 +23,10 @@ var str, startTime, imageURL, first, next,
       document.body.appendChild(img);
       
       var a = document.createElement("a");
-      a.id = "link";
       a.href = getshot.src;
-      var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
-      if (iOS === true) {
-        a.setAttribute("target", "_blank");
-      } else {
-        a.download = "workout_log " + dateTime + " " + startTime;
-      }
-      document.body.appendChild(a);
-      document.body.removeChild(getshot);
-      document.body.removeChild(a);
+      a.download = "workout_log " + dateTime + " " + startTime;
       a.click();
+      document.body.removeChild(getshot);
     };
 
 // Disclaimer
@@ -83,7 +75,18 @@ if (window.location.hash) {
   html2canvas(grablog).then(function(canvas) {
     // download canvas image
     myBase64 = canvas.toDataURL("image/png");
-    openInNewTab(myBase64);
+    var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+    if (iOS === true) {
+      var img = new Image();
+      img.crossOrigin = "Anonymous";
+      img.id = "getshot";
+      img.src = myBase64;
+      document.body.appendChild(img);
+      document.querySelector(".table").className = "table hide";
+      document.body.style.backgroundColor = "#f8ffe6";
+    } else {
+      openInNewTab(myBase64);
+    }
   });
 } else {
   // No hash? Then initialize new workout

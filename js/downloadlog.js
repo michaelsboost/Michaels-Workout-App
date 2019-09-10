@@ -23,10 +23,19 @@ var str, startTime, imageURL, first, next,
       document.body.appendChild(img);
       
       var a = document.createElement("a");
+      a.id = "link";
       a.href = getshot.src;
-      a.download = "workout_log " + dateTime + " " + startTime;
-      a.click();
+      console.log(getshot.src);
+      var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+      if (iOS === true) {
+        a.setAttribute("target", "_blank");
+      } else {
+        a.download = "workout_log " + dateTime + " " + startTime;
+      }
+      document.body.appendChild(a);
       document.body.removeChild(getshot);
+      document.body.removeChild(a);
+      a.click();
     };
 
 // Disclaimer

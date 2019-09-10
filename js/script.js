@@ -33,37 +33,6 @@ var counter = 0, countPause = 1, chosenDifficulty,
       audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/complete.mp3");
       audioElement.play();
     },
-    newWorkout      = function() {
-      // Make sure timer has already been stopped
-      clearTimeout(runTimer);
-      
-      // Reset to no file saved for new workout log
-      fileSaved = "nope";
-      
-      // Reset workout status to waiting
-      workoutStatus = "waiting";
-      
-      // Reset text
-      counter = 0;
-      countPause = 0;
-      totalhours    = howmanyhours.value;
-      pullupspermin = repspermin.value;
-      $("[data-count=reps]").text(pullupspermin);
-      $("[data-countdown=reps]").text(totalhours * 60 * pullupspermin);
-      $("[data-count=minutes], [data-output=paused]").text("0");
-
-      // Allow user to reset inputs
-      $("[data-action=randomize]").fadeIn(250);
-      $("[data-display=typeofworkout]").fadeIn(250);
-      $("[data-display=startworkout]").fadeOut(250);
-      $("[data-confirm=pauseworkout]").removeClass("hide");
-      $("[data-confirm=quitworkout]").removeClass("hide");
-      $("[data-confirm=newworkout]").addClass("hide");
-      $("[data-save=workoutlog]").addClass("hide");
-      $("[data-download=workoutlog]").addClass("hide");
-      $("[data-display=finish]").addClass("hide");
-      return false;
-    },
     scrollToView    = function(el) {
       el.scrollintoview({
         duration: "fast",
@@ -572,7 +541,7 @@ $("[data-confirm=pauseworkout]").click(function() {
 $("[data-confirm=newworkout]").click(function() {
   // Detect if user saved workout or not
   if (fileSaved === "saved") {
-    newWorkout();
+    location.reload(true);
   } else {
     Swal.fire({
       title: "You haven't saved your workout!",
@@ -584,7 +553,7 @@ $("[data-confirm=newworkout]").click(function() {
       confirmButtonText: 'Yes!'
     }).then((result) => {
       if (result.value) {
-        newWorkout();
+        location.reload(true);
       }
     });
   }

@@ -62,6 +62,9 @@ var counter = 0, countPause = 1, chosenDifficulty,
       a.click();
     };
 
+// Scroll to top
+$("html, body").scrollTop(0);
+
 // Disclaimer
 $("[data-action=disclaimer]").click(function() {
   var msg1 = "I Michael Schwartz developed this workout app for myself and myself only!\n\n",

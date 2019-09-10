@@ -25,7 +25,6 @@ var str, startTime, imageURL, first, next,
       var a = document.createElement("a");
       a.id = "link";
       a.href = getshot.src;
-      console.log(getshot.src);
       var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
       if (iOS === true) {
         a.setAttribute("target", "_blank");

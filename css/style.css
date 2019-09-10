@@ -50,6 +50,23 @@ html, body {
   border-radius: 100%;
 }
 
+/* Show store and donate buttons for larger devices */
+.largerscreen {
+  display: block;
+}
+.smallerscreen {
+  display: none;
+}
+
+@media screen and (max-width: 769px) {
+  .largerscreen {
+    display: none;
+  }
+  .smallerscreen {
+    display: block;
+  }
+}
+
 /* Center vertically and horizontally */
 .table {
   position: relative;

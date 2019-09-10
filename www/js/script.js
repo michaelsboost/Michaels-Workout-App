@@ -425,6 +425,8 @@ function deviceReady() {
         repspermin.focus();
       }
 
+      $("#howmanyhours").trigger("change");
+      
       chosenWorkoutType = $("[data-display=typeofworkout] input:checked").attr("id");
       selectedWorkoutType = $("[data-display=typeofworkout] label[for="+ chosenWorkoutType +"]").text()
       $("[data-output=workouttype]").text( selectedWorkoutType );

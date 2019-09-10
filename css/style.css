@@ -4,6 +4,10 @@
   font-family: HeitiUI;
   src: url("../libraries/font-awesome/STHeiti.ttc");
 }
+@font-face {
+  font-family: Orbitron;
+  src: url("fonts/orbitron-light.otf");
+}
 
 /* Globals */
 html, body {
@@ -29,7 +33,7 @@ html, body {
   right: 0;
 }
 .clock {
-  font-family: 'Orbitron', sans-serif;
+  font-family: Orbitron;
   font-size: 4em;
 }
 #preview {

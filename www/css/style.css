@@ -36,12 +36,14 @@ html, body {
   font-family: Orbitron;
   font-size: 4em;
 }
+.html2canvas-container, #preview {
+  min-width: 1280px;
+  width: auto;
+}
 #preview {
   position: fixed;
   top: 0;
   left: 0;
-  min-width: 1280px;
-  width: auto;
   z-index: 0;
 }
 .logoheader {

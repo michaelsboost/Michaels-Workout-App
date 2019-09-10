@@ -1,38 +1,39 @@
 // Variables
-var counter = 0, countPause = 1, chosenDifficulty,
+var counter = 0, countPause = 1, chosenDifficulty, unsupportedBrowser,
     chosenWorkoutType, selectedWorkoutType, runTimer, now, ahora,
     time, tiempo, currentH, today, saveDate, saveTime, dateTime, currentM,
     randomNum, randomNumber, minLeft, workoutLog, grabListID,
     fileSaved = "nope", workoutStatus = "waiting", nextInput,
-    audioElement    = document.createElement("audio"),
-    audioElement2   = document.createElement("audio"),
-    grablog         = document.querySelector(".grablog"),
-    site            = window.location.toString(),
-    goSound         = function() {
+    isFirefox, isChrome, isSafari, isOpera, isIE, isEdge, isBlink,
+    audioElement     = document.createElement("audio"),
+    audioElement2    = document.createElement("audio"),
+    grablog          = document.querySelector(".grablog"),
+    site             = window.location.toString(),
+    goSound          = function() {
       audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/go.mp3");
       audioElement.play();
     },
-    breakSound      = function() {
+    breakSound       = function() {
       audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/break.mp3");
       audioElement.play();
     },
-    errorSound      = function() {
+    errorSound       = function() {
       audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/error.mp3");
       audioElement.play();
     },
-    abortSound      = function() {
+    abortSound       = function() {
       audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/abort.mp3");
       audioElement.play();
     },
-    retreatSound    = function() {
+    retreatSound     = function() {
       audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/retreat.mp3");
       audioElement.play();
     },
-    finishedSound   = function() {
+    finishedSound    = function() {
       audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/complete.mp3");
       audioElement.play();
     },
-    scrollToView    = function(el) {
+    scrollToView     = function(el) {
       el.scrollintoview({
         duration: "fast",
         direction: "vertical",
@@ -41,7 +42,7 @@ var counter = 0, countPause = 1, chosenDifficulty,
         }
       });
     },
-    openInNewTab    = function(url) {
+    openInNewTab     = function(url) {
       str = $("[data-content=workoutlog]").text().trim().replace(/\s{2,}/gm,"<br>").toString();
 
       startTime = str.substring(0, str.indexOf('\\n'));
@@ -60,7 +61,22 @@ var counter = 0, countPause = 1, chosenDifficulty,
       a.target = "_blank";
       // a.download = "workout_log " + dateTime + " " + startTime;
       a.click();
+    },
+    detectWebBrowser = function() {
+      unsupportedBrowser = '<ul style="margin-top: 1em;"><li class="ib" style="width: 50%;"><h1 class="ib"><a class="block" href="https://www.google.com/chrome/" target="_blank"><i class="fa fa-chrome"></i><div>Chrome</div></a></h1></li><li class="ib" style="width: 50%;"><h1 class="ib"><a class="block" href="https://www.mozilla.org/" target="_blank"><i class="fa fa-firefox"></i><div>Firefox</div></a></h1></li><li class="ib" style="width: 50%;"><h1 class="ib"><a class="block" href="https://www.opera.com/" target="_blank"><i class="fa fa-opera"></i><div>Opera</div></a></h1></li><li class="ib" style="width: 50%;"><h1 class="ib"><a class="block" href="https://www.microsoftedgeinsider.com/en-us/download/" target="_blank"><i class="fa fa-edge"></i><div>Edge</div></a></h1></li></ul>';
+      if (platform.name === "Chrome" || platform.name === "Firefox" || platform.name === "Opera" || platform.name === "Microsoft Edge") {
+        // supported browsers
+      } else {
+        Swal.fire({
+          title: "Unsupported Web Browser!",
+          html: "You are using an unsupported web browser.<br>We recommend using one of these...<br><br>" + unsupportedBrowser,
+          type: "warning"
+        });
+      }
     };
+
+// Alert the user if using an unsupported browser
+detectWebBrowser();
 
 // Disclaimer
 $("[data-action=disclaimer]").click(function() {

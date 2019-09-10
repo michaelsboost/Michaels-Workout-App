@@ -67,6 +67,7 @@ Michael's Workout App uses a number of open source projects to work properly:
 * [FileSaver.js](https://github.com/eligrey/FileSaver.js/) - Client-side solution for saving files
 * [Lity](https://sorgalla.com/lity/) - Lightbox for how to videos
 * [html2canvas](https://html2canvas.hertzen.com) - Turn viewable canvas into a downloadable image
+* [platform.js](https://github.com/bestiejs/platform.js/) - Library that detects web browsers
 
 Development
 -------------

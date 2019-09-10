@@ -2,32 +2,7 @@
 var str, startTime, imageURL, first, next,
     testString = "Date: 9:6:2019\nStart time: 3:10:57 PM\nObjective: 17 pushups a minute for 1 hour\nGoal: 1020 pushups in 1 hour\nCompleted: 1020 pushups\n60 minutes have gone by\n0 pushups remaining\n0 minutes remaining\nTimes Paused: 0\nFinished at: 4:10:56 PM",
     grablog      = document.querySelector(".grablog"),
-    site         = window.location,
-    openInNewTab = function(url) {
-      str = window.location.hash;
-      str = str.substr(1, str.length);
-      str = str.replace(/%20/g, " ");
-
-      startTime = str.substring(0, str.indexOf('\\n'));
-      first = str.indexOf('\\n');
-      next  = str.indexOf('\\n', first + 1);
-      dateTime  = startTime.replace(/Date: /g, "");
-      startTime = str.substring(str.indexOf('Finished at: '));
-      startTime  = startTime.replace(/Finished at: /g, "");
-
-      var img = new Image();
-      img.crossOrigin = "Anonymous";
-      img.id = "getshot";
-      img.className = "hide";
-      img.src = url;
-      document.body.appendChild(img);
-      
-      var a = document.createElement("a");
-      a.href = getshot.src;
-      a.download = "workout_log " + dateTime + " " + startTime;
-      a.click();
-      document.body.removeChild(getshot);
-    };
+    site         = window.location;
 
 // Disclaimer
 $("[data-action=disclaimer]").click(function() {
@@ -70,7 +45,22 @@ if (window.location.hash) {
   // Display in workout log
   workoutLog = str.replace(/\\n/g, "<br>");
   $("[data-output=workoutlog]").html(workoutLog + "<br><br>Try a workout at: https://michaelsboost.com/workout");
-    
+  
+  // grab date and time for file name
+  str = window.location.hash;
+  str = str.substr(1, str.length);
+  str = str.replace(/%20/g, " ");
+
+  startTime = str.substring(0, str.indexOf('\\n'));
+  first = str.indexOf('\\n');
+  next  = str.indexOf('\\n', first + 1);
+  dateTime  = startTime.replace(/Date: /g, "");
+  startTime = str.substring(str.indexOf('Finished at: '));
+  startTime  = startTime.replace(/Finished at: /g, "");
+  
+  // Scroll to top
+  window.scrollTo(0, 0);
+  
   // convert website to image
   html2canvas(grablog).then(function(canvas) {
     // download canvas image
@@ -85,7 +75,9 @@ if (window.location.hash) {
       document.querySelector(".table").className = "table hide";
       document.body.style.backgroundColor = "#f8ffe6";
     } else {
-      openInNewTab(myBase64);
+      canvas.toBlob(function(blob) {
+        saveAs(blob, "workout_log " + dateTime + " " + startTime + ".png");
+      }, "image/png");
     }
   });
 } else {

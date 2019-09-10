@@ -1,8 +1,7 @@
 // Variables
 var counter = 0, countPause = 1, chosenDifficulty,
-    chosenWorkoutType, selectedWorkoutType, runTimer, pullupspermin,
-    totalhours, now, ahora, time, tiempo, currentH,
-    today, saveDate, saveTime, dateTime, currentM,
+    chosenWorkoutType, selectedWorkoutType, runTimer, now, ahora,
+    time, tiempo, currentH, today, saveDate, saveTime, dateTime, currentM,
     randomNum, randomNumber, minLeft, workoutLog, grabListID,
     fileSaved = "nope", workoutStatus = "waiting", nextInput,
     audioElement    = document.createElement("audio"),
@@ -360,13 +359,10 @@ $("#repspermin, #howmanyhours").on("keyup change", function() {
   // This function is called every minute
   // multiply by 4 for hour many pullups per min
   // 4*120 = 480 pullups every min for 2 hours
-
-  totalhours    = howmanyhours.value;
-  pullupspermin = repspermin.value;
-
+  
   if (repspermin.value && howmanyhours.value) {
     $("[data-confirm=workoutparameters]").show();
-    $("[data-calculate=reps], [data-calculate=goal]").text(totalhours * 60 * pullupspermin);
+    $("[data-calculate=reps], [data-calculate=goal]").text(howmanyhours.value * 60 * repspermin.value);
   } else {
     $("[data-confirm=workoutparameters]").hide();
   }
@@ -475,13 +471,15 @@ displayTime();
 $("[data-confirm=workoutparameters]").click(function() {
   workoutStatus = "running";
   counter = 1;
-
-  totalhours    = howmanyhours.value;
-  pullupspermin = repspermin.value;
+    
+  if (howmanyhours.value.substr(0, 1) === ".") {
+    howmanyhours.value = "0" + howmanyhours.value;
+  }
+  
   $("[data-display=workoutparameters]").fadeOut(250);
   $("[data-action=randomize]").fadeOut(250);
   $("[data-display=startworkout]").fadeIn(250);
-  $("[data-countdown=reps]").text(totalhours * 60 * pullupspermin);
+  $("[data-countdown=reps]").text(howmanyhours.value * 60 * repspermin.value);
   $("[data-count=minutes]").text("0 minutes have");
   $("[data-count=reps]").text("0");
   startWorkout();

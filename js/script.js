@@ -75,6 +75,9 @@ var counter = 0, countPause = 1, chosenDifficulty, unsupportedBrowser,
       }
     };
 
+// Always start view from stop
+window.scrollTo(0, 0);
+
 // Alert the user if using an unsupported browser
 detectWebBrowser();
 

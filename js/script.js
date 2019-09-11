@@ -64,7 +64,7 @@ var counter = 0, countPause = 1, chosenDifficulty, unsupportedBrowser,
     },
     detectWebBrowser = function() {
       unsupportedBrowser = '<ul style="margin-top: 1em;"><li class="ib" style="width: 50%;"><h1 class="ib"><a class="block" href="https://www.google.com/chrome/" target="_blank"><i class="fa fa-chrome"></i><div>Chrome</div></a></h1></li><li class="ib" style="width: 50%;"><h1 class="ib"><a class="block" href="https://www.mozilla.org/" target="_blank"><i class="fa fa-firefox"></i><div>Firefox</div></a></h1></li><li class="ib" style="width: 50%;"><h1 class="ib"><a class="block" href="https://www.opera.com/" target="_blank"><i class="fa fa-opera"></i><div>Opera</div></a></h1></li><li class="ib" style="width: 50%;"><h1 class="ib"><a class="block" href="https://www.microsoftedgeinsider.com/en-us/download/" target="_blank"><i class="fa fa-edge"></i><div>Edge</div></a></h1></li></ul>';
-      if (platform.name === "Chrome" || platform.name === "Firefox" || platform.name === "Opera" || platform.name === "Microsoft Edge") {
+      if (platform.name === "Chrome" || platform.name === "Chrome Mobile" || platform.name === "Firefox" || platform.name === "Firefox for iOS" || platform.name === "Opera" || platform.name === "Microsoft Edge") {
         // supported browsers
       } else {
         Swal.fire({

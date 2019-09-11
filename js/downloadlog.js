@@ -76,6 +76,7 @@ if (window.location.hash) {
 
       var a = document.createElement("a");
       a.href = getshot.src;
+      a.target = "_blank";
       a.download = "workout_log " + dateTime + " " + startTime + ".png";
       a.click();
       document.body.removeChild(img);

@@ -598,6 +598,10 @@ $("[data-save=workoutlog]").click(function() {
 
 // Download Workout Log As Image
 $("[data-download=workoutlog]").click(function() {
+  // User is saving workout log
+  // Updating variable so user isn't prompted upon new workout
+  fileSaved = "saved";
+  
   workoutLog = $("[data-content=workoutlog]").text().trim().replace(/\s{2,}/gm,"\n").toString();
   workoutLog = workoutLog.replace(/\n/g,"\\n");
   workoutLog = workoutLog.replace(/ /g,"%20");

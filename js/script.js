@@ -86,11 +86,12 @@ $("[data-action=disclaimer]").click(function() {
   var msg1 = "I Michael Schwartz developed this workout app for myself and myself only!\n\n",
       msg2 = "I am not held liable if you do any of the workouts listed in this app!\n\n",
       msg3 = "By using this app you agree that you're doing these workouts by your own discression only!<br><br>",
-      msg4 = "Contribution and Source Code: <br><a href=\"javascript:window.open('https://github.com/michaelsboost/Michaels-Workout-App/', '_system')\">https://github.com/michaelsboost/Michaels-Workout-App/</a>";
+      msg4 = "Contribution and Source Code: <br><a href=\"https://github.com/michaelsboost/Michaels-Workout-App/\">https://github.com/michaelsboost/Michaels-Workout-App/</a><br>",
+      msg5 = "<a href=\"https://play.google.com/store/apps/details?id=com.michael.workoutapp&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1\" target=\"_blank\" title=\"Get it on Google Play\"><img src=\"https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png\" style=\"margin: 0 0 -20px 0;\"></a>";
 
   Swal.fire({
     title: "Disclaimer",
-    html: msg1 + msg2 + msg3 + msg4,
+    html: msg1 + msg2 + msg3 + msg4 + msg5,
     type: "warning"
   });
 });

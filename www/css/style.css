@@ -37,7 +37,7 @@ html, body {
   font-size: 4em;
 }
 .html2canvas-container, #preview {
-  min-width: 1280px;
+  min-width: 999999px;
   width: auto;
 }
 #preview {
@@ -50,6 +50,23 @@ html, body {
   width: 30%;
   margin: 0;
   border-radius: 100%;
+}
+
+/* Show store and donate buttons for larger devices */
+.largerscreen {
+  display: block;
+}
+.smallerscreen {
+  display: none;
+}
+
+@media screen and (max-width: 769px) {
+  .largerscreen {
+    display: none;
+  }
+  .smallerscreen {
+    display: block;
+  }
 }
 
 /* Center vertically and horizontally */

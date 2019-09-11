@@ -136,6 +136,9 @@ function savebase64AsImageFile(filename,content,contentType) {
   });
 }
 
+// Always start view from stop
+window.scrollTo(0, 0);
+
 // Check if Android Device is Ready
 function deviceReady() {
   // Disclaimer
@@ -426,7 +429,6 @@ function deviceReady() {
       }
 
       $("#howmanyhours").trigger("change");
-      
       chosenWorkoutType = $("[data-display=typeofworkout] input:checked").attr("id");
       selectedWorkoutType = $("[data-display=typeofworkout] label[for="+ chosenWorkoutType +"]").text()
       $("[data-output=workouttype]").text( selectedWorkoutType );
@@ -555,7 +557,7 @@ function deviceReady() {
   $("[data-confirm=workoutparameters]").click(function() {
     workoutStatus = "running";
     counter = 1;
-    
+
     if (howmanyhours.value.substr(0, 1) === ".") {
       howmanyhours.value = "0" + howmanyhours.value;
     }
@@ -663,8 +665,13 @@ function deviceReady() {
   $("[data-download=workoutlog]").click(function() {
     window.scrollTo(0, 0);
     
+    // User is saving workout log
+    // Updating variable so user isn't prompted upon new workout
+    fileSaved = "saved";
+    
     workoutLog = $("[data-content=workoutlog]").text().trim().replace(/\s{2,}/gm,"<br>").toString();
-    $("[data-output=workoutlog]").html(workoutLog + "<br><br>Try a workout at: https://michaelsboost.com/workout");
+    workoutLog = workoutLog + "<br><br>Try a workout at:<br>https://michaelsboost.com/workout";
+    $("[data-output=workoutlog]").html(workoutLog);
 
     // convert website to image
     html2canvas(grablog).then(function(canvas) {

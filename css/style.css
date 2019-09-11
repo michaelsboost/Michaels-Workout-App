@@ -49,6 +49,9 @@ html, body {
   margin: 0;
   border-radius: 100%;
 }
+.workoutlog {
+  white-space: pre;
+}
 
 /* Show store and donate buttons for larger devices */
 .largerscreen {

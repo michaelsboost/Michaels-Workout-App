@@ -43,8 +43,8 @@ if (window.location.hash) {
   document.title = "Download Workout Log: " + startTime;
 
   // Display in workout log
-  workoutLog = str.replace(/\\n/g, "<br>");
-  $("[data-output=workoutlog]").html(workoutLog + "<br><br>Try a workout at: https://michaelsboost.com/workout");
+  workoutLog = str.replace(/\\n/g, "\n");
+  $("[data-output=workoutlog]").html(workoutLog + "\n\nTry a workout at:\nhttps://michaelsboost.com/workout");
   
   // grab date and time for file name
   str = window.location.hash;

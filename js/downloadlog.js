@@ -67,13 +67,18 @@ if (window.location.hash) {
     myBase64 = canvas.toDataURL("image/png");
     var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
     if (iOS === true) {
+      // remove image if already visible
       var img = new Image();
       img.crossOrigin = "Anonymous";
       img.id = "getshot";
       img.src = myBase64;
       document.body.appendChild(img);
-      document.querySelector(".table").className = "table hide";
-      document.body.style.backgroundColor = "#f8ffe6";
+
+      var a = document.createElement("a");
+      a.href = getshot.src;
+      a.download = "workout_log " + dateTime + " " + startTime + ".png";
+      a.click();
+      document.body.removeChild(img);
     } else {
       canvas.toBlob(function(blob) {
         saveAs(blob, "workout_log " + dateTime + " " + startTime + ".png");

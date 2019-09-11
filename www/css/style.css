@@ -36,10 +36,6 @@ html, body {
   font-family: Orbitron;
   font-size: 4em;
 }
-.html2canvas-container, #preview {
-  min-width: 999999px;
-  width: auto;
-}
 #preview {
   position: fixed;
   top: 0;

@@ -62,6 +62,7 @@ Michael's Workout App uses a number of open source projects to work properly:
 
 * [jQuery](http://jquery.com/) - Because the [scrollintoview](https://github.com/litera/jquery-scrollintoview) plugin requires it
 * [Normalize](https://github.com/necolas/normalize.css) - CSS reset library
+* [Poly UI Kit](https://github.com/Guilh/Poly) - Beautiful and customizable responsive interface library
 * [AlertifyJS](https://github.com/fabien-d/alertify.js/tree/0.3) - Customizable notification system
 * [SweetAlert2](https://sweetalert2.github.io/) - Stylish alert dialog
 * [FileSaver.js](https://github.com/eligrey/FileSaver.js/) - Client-side solution for saving files

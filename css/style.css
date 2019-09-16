@@ -141,6 +141,7 @@ html, body {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 0.7em;
   margin: 0;
+  width: auto;
 }
 .selectdropdowns ul li label,
 .selectdropdowns ul li a {

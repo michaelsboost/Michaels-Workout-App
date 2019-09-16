@@ -398,11 +398,11 @@ $("#repspermin, #howmanyhours").on("keyup change", function() {
     $("[data-confirm=workoutparameters]").show();
 
     if ($("[data-set=min]").text() === "min") {
-      $("[data-calculate=reps], [data-calculate=goal]").text(howmanyhours.value * 60 * repspermin.value);
+      $("[data-calculate=reps], [data-calculate=goal]").text(Math.round(howmanyhours.value * 60 * repspermin.value));
     } else if ($("[data-set=min]").text() === "30 sec") {
-      $("[data-calculate=reps], [data-calculate=goal]").text(howmanyhours.value * 2 * 60 * repspermin.value);
+      $("[data-calculate=reps], [data-calculate=goal]").text(Math.round(howmanyhours.value * 2 * 60 * repspermin.value));
     } else if ($("[data-set=min]").text() === "45 sec") {
-      $("[data-calculate=reps], [data-calculate=goal]").text(howmanyhours.value * 60 * 1.5 * repspermin.value);
+      $("[data-calculate=reps], [data-calculate=goal]").text(Math.round(howmanyhours.value * 60 * 1.5 * repspermin.value));
     }
   } else {
     $("[data-confirm=workoutparameters]").hide();
@@ -497,7 +497,7 @@ function startWorkout() {
         $("[data-count=minutes]").text(parseInt(30).toString() * minLeft + " seconds have");
 
         // 1 minute remaining
-        $("[data-count=minutesleft]").text(howmanyhours.value * 60 - minLeft / 2 + " minutes");
+        $("[data-count=minutesleft]").text(Math.round(howmanyhours.value * 60 - minLeft / 2) + " minutes");
         if ($("[data-count=minutesleft]").text() === "1 minutes") {
           $("[data-count=minutesleft]").text("1 minute");
         }
@@ -519,7 +519,7 @@ function startWorkout() {
         }
         
         // 1 minute remaining
-        $("[data-count=minutesleft]").text(howmanyhours.value * 60 - minLeft / 2 + " minutes");
+        $("[data-count=minutesleft]").text(Math.round(howmanyhours.value * 60 - minLeft / 2) + " minutes");
         if ($("[data-count=minutesleft]").text() === "1 minutes") {
           $("[data-count=minutesleft]").text("1 minute");
         } else if ($("[data-count=minutesleft]").text() === "0.5 minutes") {
@@ -590,9 +590,9 @@ $("[data-confirm=workoutparameters]").click(function() {
 
   // Countdown reps
   if ($("[data-set=min]").text() === "min") {
-    $("[data-countdown=reps]").text(howmanyhours.value * 60 * repspermin.value);
+    $("[data-countdown=reps]").text(Math.round(howmanyhours.value * 60 * repspermin.value));
   } else if ($("[data-set=min]").text() === "30 sec") {
-    $("[data-countdown=reps]").text(howmanyhours.value * 2 * 60 * repspermin.value);
+    $("[data-countdown=reps]").text(Math.round(howmanyhours.value * 2 * 60 * repspermin.value));
   } else if ($("[data-set=min]").text() === "45 sec") {
     $("[data-countdown=reps]").text(Math.round(howmanyhours.value * 1.5 * 60 * repspermin.value));
   }

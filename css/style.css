@@ -1,6 +1,14 @@
 @import url("../libraries/alertifyjs/css/alertify.core.css");
 @import url("../libraries/alertifyjs/css/alertify.default.css");
 @font-face {
+  font-family: FiraSans;
+  src: url("../libraries/font-awesome/FiraSans-Light.ttf");
+}
+@font-face {
+  font-family: Lato;
+  src: url("../libraries/font-awesome/Lato-Light.ttf");
+}
+@font-face {
   font-family: HeitiUI;
   src: url("../libraries/font-awesome/STHeiti.ttc");
 }
@@ -112,9 +120,27 @@ html, body {
 }
 .selectdropdowns ul li input[type=text],
 .selectdropdowns ul li input[type=number] {
-  display: block;
+  display: inline-block;
   position: relative;
   padding: 30px 80px;
+}
+.selectdropdowns ul li:first-child input[type=text],
+.selectdropdowns ul li:first-child input[type=number] {
+  /* min */
+  width: calc(100% - 118.9px);
+  /* 30-45 sec */
+/*  width: calc(100% - 139.9px);*/
+  padding: 30px 20px 30px 80px;
+/*  padding: 30px 0 30px 80px;*/
+}
+.selectdropdowns ul li .sidebtn {
+  position: relative;
+  padding: 31.5px 43px;
+  border-radius: 0 0.4em 0.4em 0;
+  float: right;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.7em;
+  margin: 0;
 }
 .selectdropdowns ul li label,
 .selectdropdowns ul li a {

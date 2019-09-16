@@ -234,6 +234,9 @@
               <ul class="headline-secondary--grouped">
                 <li>
                   <input type="number" id="repspermin" name="workoutparameters" placeholder="Reps per minute" min="1" step="1" max="1440">
+                  <button class="btn--info sidebtn" data-set="min" data-interval="60000">
+                    min
+                  </button>
                 </li>
                 <li>
                   <input type="number" id="howmanyhours" name="workoutparameters" placeholder="How many hours?" min=".25" max="24" step=".25">
@@ -267,7 +270,7 @@
                   Start time: <span data-output="starttime"></span>
                 </h1>
                 <h1 class="center headline-primary--grouped">
-                  Objective: <span data-output="repspermin"></span> <span data-output="workouttype" style="text-transform: capitalize;"></span> a minute for <span data-output="howmanyhours"></span>
+                  Objective: <span data-output="repspermin"></span> <span data-output="workouttype" style="text-transform: capitalize;"></span> <span data-output="minorsec">a minute for</span> <span data-output="howmanyhours"></span>
                 </h1>
                 <h1 class="center headline-primary--grouped">
                   Goal: <span data-calculate="goal">?</span> <span data-output="workouttype" style="text-transform: capitalize;"></span> in <span data-output="howmanyhours"></span>

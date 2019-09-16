@@ -409,7 +409,7 @@ $("#repspermin, #howmanyhours").on("keyup change", function() {
   }
 
   $("[data-count=minutesleft]").text(Math.round(howmanyhours.value * 60) + " minutes");
-  $("[data-calculate=totalmins]").text(Math.round(howmanyhours.value * 60) + " minutes");
+  $("[data-calculate=totalmins]").text($("[data-count=minutesleft]").text());
 }).on("keydown", function(e) {
   // press escape to go back to type of workout
   if (e.which === 27) {

@@ -555,8 +555,8 @@ function startWorkout() {
         finishWorkout();
       }
     }
-//  }, $("[data-set=min]").attr("data-interval"));
-  }, 3000);
+  }, $("[data-set=min]").attr("data-interval"));
+//  }, 3000);
 }
 function abortWorkout() {
   countPause = 1;

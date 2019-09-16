@@ -31,6 +31,18 @@ var counter = 0, countPause = 1, chosenDifficulty,
       audioElement.setAttribute("src", "https://michaelsboost.com/Michaels-Workout-App/media/complete.mp3");
       audioElement.play();
     },
+    finishWorkout   = function() {
+      $("[data-display=finish]").removeClass("hide");
+      $("[data-confirm=newworkout]").removeClass("hide");
+      $("[data-save=workoutlog]").removeClass("hide");
+      $("[data-download=workoutlog]").removeClass("hide");
+      $("[data-confirm=quitworkout]").addClass("hide");
+      $("[data-confirm=pauseworkout]").addClass("hide");
+      $("[data-count=minutesleft]").text("0 minutes");
+      $("[data-output=finish]").text(time);
+      clearTimeout(runTimer);
+      finishedSound();
+    },
     scrollToView    = function(el) {
       el.scrollintoview({
         duration: "fast",
@@ -448,12 +460,19 @@ function deviceReady() {
 
     if (repspermin.value && howmanyhours.value) {
       $("[data-confirm=workoutparameters]").show();
-      $("[data-calculate=reps], [data-calculate=goal]").text(howmanyhours.value * 60 * repspermin.value);
+
+      if ($("[data-set=min]").text() === "min") {
+        $("[data-calculate=reps], [data-calculate=goal]").text(Math.round(howmanyhours.value * 60 * repspermin.value));
+      } else if ($("[data-set=min]").text() === "30 sec") {
+        $("[data-calculate=reps], [data-calculate=goal]").text(Math.round(howmanyhours.value * 2 * 60 * repspermin.value));
+      } else if ($("[data-set=min]").text() === "45 sec") {
+        $("[data-calculate=reps], [data-calculate=goal]").text(Math.round(howmanyhours.value * 60 * 1.5 * repspermin.value));
+      }
     } else {
       $("[data-confirm=workoutparameters]").hide();
     }
 
-    $("[data-count=minutesleft]").text(howmanyhours.value * 60 + " minutes");
+    $("[data-count=minutesleft]").text(Math.round(howmanyhours.value * 60) + " minutes");
     $("[data-calculate=totalmins]").text($("[data-count=minutesleft]").text());
   }).on("keydown", function(e) {
     // press escape to go back to type of workout
@@ -483,6 +502,33 @@ function deviceReady() {
     }
   });
 
+  // Change between 1 min/30 sec/45 sec intervals
+  $("[data-set=min]").click(function() {
+    if (this.textContent === "min") {
+      // then 30 sec
+      this.textContent = "30 sec";
+      $(this).attr("data-interval", "30000");
+      repspermin.setAttribute("placeholder", "Reps per 30 seconds");
+      $("[data-output=minorsec]").text("every 30 seconds for");
+      $(".selectdropdowns ul li:first-child input[type=number]").css("width", "calc(100% - 139.9px)");
+    } else if (this.textContent === "30 sec") {
+      // if 30 sec then 45 sec
+      this.textContent = "45 sec";
+      $(this).attr("data-interval", "45000");
+      repspermin.setAttribute("placeholder", "Reps per 45 seconds");
+      $("[data-output=minorsec]").text("every 45 seconds for");
+      $(".selectdropdowns ul li:first-child input[type=number]").css("width", "calc(100% - 139.9px)");
+    } else {
+      // if 45 sec then 1 min
+      this.textContent = "min";
+      $(this).attr("data-interval", "60000");
+      repspermin.setAttribute("placeholder", "Reps per minute");
+      $("[data-output=minorsec]").text("a minute for");
+      $(".selectdropdowns ul li:first-child input[type=number]").css("width", "calc(100% - 118.9px)");
+    }
+    $("#repspermin, #howmanyhours").trigger("change");
+  }).click();
+
   // Start/Stop The Workout
   function startWorkout() {
     ahora = new Date();
@@ -504,37 +550,77 @@ function deviceReady() {
       // Display how many minutes have gone by
       $("[data-count=minutes]").text(counter++);
       minLeft  = $("[data-count=minutes]").text() - 0;
+      console.log(minLeft);
 
+      // Countdown reps
       if (minLeft === 1) {
-        $("[data-count=minutes]").text(minLeft + " minute has");
-        $("[data-count=minutesleft]").text(howmanyhours.value * 60 - minLeft + " minute");
+        if ($("[data-set=min]").text() === "min") {
+          $("[data-count=minutes]").text(minLeft + " minute has");
+          $("[data-count=minutesleft]").text(howmanyhours.value * 60 - minLeft + " minutes");
+        } else if ($("[data-set=min]").text() === "30 sec") {
+          $("[data-count=minutes]").text(parseInt(30).toString() * minLeft + " seconds have");
+
+          // 1 minute remaining
+          $("[data-count=minutesleft]").text(Math.round(howmanyhours.value * 60 - minLeft / 2) + " minutes");
+          if ($("[data-count=minutesleft]").text() === "1 minutes") {
+            $("[data-count=minutesleft]").text("1 minute");
+          }
+        } else if ($("[data-set=min]").text() === "45 sec") {
+          $("[data-count=minutes]").text("45 seconds have");
+          $("[data-count=minutesleft]").text(Math.round(howmanyhours.value * 60 - minLeft / 1.5) + " minutes");
+        }
       } else {
-        $("[data-count=minutes]").text(minLeft + " minutes have");
-        $("[data-count=minutesleft]").text(howmanyhours.value * 60 - minLeft + " minutes");
+        if ($("[data-set=min]").text() === "min") {
+          $("[data-count=minutes]").text(minLeft + " minutes have");
+          $("[data-count=minutesleft]").text(howmanyhours.value * 60 - minLeft + " minutes");
+
+        } else if ($("[data-set=min]").text() === "30 sec") {
+          // 1 minute has gone by
+          if (parseInt(30).toString() * minLeft / 60 === 1) {
+            $("[data-count=minutes]").text(parseInt(30).toString() * minLeft / 60 + " minute has");
+          } else {
+            $("[data-count=minutes]").text(parseInt(30).toString() * minLeft / 60 + " minutes have");
+          }
+
+          // 1 minute remaining
+          $("[data-count=minutesleft]").text(Math.round(howmanyhours.value * 60 - minLeft / 2) + " minutes");
+          if ($("[data-count=minutesleft]").text() === "1 minutes") {
+            $("[data-count=minutesleft]").text("1 minute");
+          } else if ($("[data-count=minutesleft]").text() === "0.5 minutes") {
+            $("[data-count=minutesleft]").text("0.5 minute");
+          }
+
+        } else if ($("[data-set=min]").text() === "45 sec") {
+          $("[data-count=minutes]").text(parseInt(45).toString() * minLeft + " seconds have");
+          $("[data-count=minutesleft]").text(Math.round(howmanyhours.value * 60 - minLeft / 1.5) + " minutes");
+        }
       }
 
       // Count how many reps
-      $("[data-count=reps]").text(parseInt(repspermin.value * counter - repspermin.value));
+      $("[data-count=reps]").text(Math.round(parseInt(repspermin.value * counter - repspermin.value)));
 
       // Count how many reps left to do
-      $("[data-countdown=reps]").text(parseInt($("[data-calculate=reps]").text() - $("[data-count=reps]").text()));
+      $("[data-countdown=reps]").text(Math.round(parseInt($("[data-calculate=reps]").text() - $("[data-count=reps]").text())));
 
       // Let the user know every minute when to execute workout
       goSound();
 
       // Workout completed
-      if (counter > howmanyhours.value * 60) {
-        $("[data-display=finish]").removeClass("hide");
-        $("[data-confirm=newworkout]").removeClass("hide");
-        $("[data-save=workoutlog]").removeClass("hide");
-        $("[data-download=workoutlog]").removeClass("hide");
-        $("[data-confirm=quitworkout]").addClass("hide");
-        $("[data-confirm=pauseworkout]").addClass("hide");
-        $("[data-output=finish]").text(time);
-        clearTimeout(runTimer);
-        finishedSound();
+      if ($("[data-set=min]").text() === "min") {
+        if (counter > howmanyhours.value * 60) {
+          finishWorkout();
+        }
+      } else if ($("[data-set=min]").text() === "30 sec") {
+        if (counter / 2 > howmanyhours.value * 60) {
+          finishWorkout();
+        }
+      } else if ($("[data-set=min]").text() === "45 sec") {
+        if (counter / 1.75 > howmanyhours.value * 60) {
+          finishWorkout();
+        }
       }
-    }, 60000);
+    }, $("[data-set=min]").attr("data-interval"));
+  //  }, 3000);
   }
   function abortWorkout() {
     countPause = 1;
@@ -565,7 +651,16 @@ function deviceReady() {
     $("[data-display=workoutparameters]").fadeOut(250);
     $("[data-action=randomize]").fadeOut(250);
     $("[data-display=startworkout]").fadeIn(250);
-    $("[data-countdown=reps]").text(howmanyhours.value * 60 * repspermin.value);
+
+    // Countdown reps
+    if ($("[data-set=min]").text() === "min") {
+      $("[data-countdown=reps]").text(Math.round(howmanyhours.value * 60 * repspermin.value));
+    } else if ($("[data-set=min]").text() === "30 sec") {
+      $("[data-countdown=reps]").text(Math.round(howmanyhours.value * 2 * 60 * repspermin.value));
+    } else if ($("[data-set=min]").text() === "45 sec") {
+      $("[data-countdown=reps]").text(Math.round(howmanyhours.value * 1.5 * 60 * repspermin.value));
+    }
+
     $("[data-count=minutes]").text("0 minutes have");
     $("[data-count=reps]").text("0");
     startWorkout();

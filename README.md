@@ -75,7 +75,7 @@ Development
 
 Want to contribute? Great!  
 
-*As of September 16th 2019 Michael's Workout App is no longer an active project.  
+*As of September 17th 2019 Michael's Workout App is no longer an active project.  
 All updates as of that date and on are solely contributor based implementations.*
 
 You can submit a pull request or simply share the project :)

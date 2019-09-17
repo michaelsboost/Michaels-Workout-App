@@ -28,7 +28,7 @@ Then Execute!
 Version
 -------------
 
-0.5
+0.7
 
 License
 -------------

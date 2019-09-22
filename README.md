@@ -93,6 +93,6 @@ If my Workout App was at all helpful for you. You can show your appreciation a f
 Background
 -------------
 
-Every day I get asked what do I do fitness-wise. I mix things up basically for me if it doesn't suck it's not worth doing. Like 1,020 pushups a day, running 100 miles a week, etc: I put my body through hell as a means of callusing my mind like we callus our hands to I can stay mentally and physically strong. I still do progressive overload however my main method and focus upon fitness is endurance exercises as I've been big into fitness and martial arts my whole life. So that's why I created this application. I used to log writing on paper now the app does it for me.
+Every day I get asked what do I do fitness-wise. I mix things up basically for me if it doesn't suck it's not worth doing. Like 1,020 pushups a day, running 100 miles a week, etc: I put my body through hell as a means of callusing my mind like we callus our hands so I can stay mentally and physically strong. I still do progressive overload however my main method and focus upon fitness is endurance exercises as I've been big into fitness and martial arts my whole life. So that's why I created this application. I used to log writing on paper now the app does it for me.
 
 ![](https://raw.githubusercontent.com/michaelsboost/Michaels-Workout-App/gh-pages/me.jpg)

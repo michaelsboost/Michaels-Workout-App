@@ -786,7 +786,6 @@ search.onkeyup = function() {
   }
 };
 
-
 // Auto open how to video
 //$("[data-display=typeofworkout] a:first").trigger("click");
 

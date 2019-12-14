@@ -237,3 +237,9 @@ html, body {
 .whitetxt {
   color: #fff;
 }
+.awesomplete {
+  display: block;
+}
+.awesomplete .visually-hidden {
+  display: none;
+}

@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="libraries/font-awesome/macset.css" />
     <link rel="stylesheet" href="libraries/sweetalert2/sweetalert2.min.css" />
     <link rel="stylesheet" href="libraries/lity/lity.css">
+    <link rel="stylesheet" href="libraries/awesomplete/awesomplete.css">
     <link rel="stylesheet" href="css/style.css" />
     <script src="libraries/jquery/jquery.js"></script>
     <script src="libraries/jquery/jquery-migrate-1.2.1.min.js"></script>
@@ -74,6 +75,14 @@
               </h1>
               <ul class="headline-secondary--grouped">
                 <li>
+                  <input type="text" id="search" placeholder="Search..." style="width: 100%;">
+                  <button class="btn--info sidebtn" style="background: transparent; color: #999; position: absolute; top: 0; right: 0; cursor: text; opacity: 1;" onclick="search.focus()">
+                    <i class="fa fa-search" style="transform: scale(1.5);"></i>
+                  </button>
+                </li>
+              </ul>
+              <ul class="headline-secondary--grouped">
+                <li data-workout="pullups">
                   <input type="radio" id="pullups" name="workoutGroup">
                   <label for="pullups" class="fl">pullups</label>
 
@@ -83,7 +92,7 @@
                     <i class="fa fa-play-circle"></i>
                   </a>
                 </li>
-                <li>
+                <li data-workout="chinups">
                   <input type="radio" id="chinups" name="workoutGroup">
                   <label for="chinups" class="fl">chinups</label>
 
@@ -93,7 +102,7 @@
                     <i class="fa fa-play-circle"></i>
                   </a>
                 </li>
-                <li>
+                <li data-workout="muscleups">
                   <input type="radio" id="muscleups" name="workoutGroup">
                   <label for="muscleups" class="fl">muscle ups</label>
 
@@ -103,7 +112,7 @@
                     <i class="fa fa-play-circle"></i>
                   </a>
                 </li>
-                <li>
+                <li data-workout="pushups">
                   <input type="radio" id="pushups" name="workoutGroup">
                   <label for="pushups" class="fl">pushups</label>
 
@@ -113,7 +122,7 @@
                     <i class="fa fa-play-circle"></i>
                   </a>
                 </li>
-                <li>
+                <li data-workout="crunches">
                   <input type="radio" id="crunches" name="workoutGroup">
                   <label for="crunches" class="fl">crunches</label>
 
@@ -123,7 +132,7 @@
                     <i class="fa fa-play-circle"></i>
                   </a>
                 </li>
-                <li>
+                <li data-workout="situps">
                   <input type="radio" id="situps" name="workoutGroup">
                   <label for="situps" class="fl">situps</label>
 
@@ -133,7 +142,7 @@
                     <i class="fa fa-play-circle"></i>
                   </a>
                 </li>
-                <li>
+                <li data-workout="burpees">
                   <input type="radio" id="burpees" name="workoutGroup">
                   <label for="burpees" class="fl">burpees</label>
 
@@ -143,7 +152,7 @@
                     <i class="fa fa-play-circle"></i>
                   </a>
                 </li>
-                <li>
+                <li data-workout="dips">
                   <input type="radio" id="dips" name="workoutGroup">
                   <label for="dips" class="fl">dips</label>
 
@@ -153,7 +162,7 @@
                     <i class="fa fa-play-circle"></i>
                   </a>
                 </li>
-                <li>
+                <li data-workout="squats">
                   <input type="radio" id="squats" name="workoutGroup">
                   <label for="squats" class="fl">squats</label>
 
@@ -163,7 +172,7 @@
                     <i class="fa fa-play-circle"></i>
                   </a>
                 </li>
-                <li>
+                <li data-workout="lunges">
                   <input type="radio" id="lunges" name="workoutGroup">
                   <label for="lunges" class="fl">lunges</label>
 
@@ -173,7 +182,7 @@
                     <i class="fa fa-play-circle"></i>
                   </a>
                 </li>
-                <li>
+                <li data-workout="jumps, high jumps, box jumps">
                   <input type="radio" id="jumps" name="workoutGroup">
                   <label for="jumps" class="fl">jumps</label>
 
@@ -183,7 +192,7 @@
                     <i class="fa fa-play-circle"></i>
                   </a>
                 </li>
-                <li>
+                <li data-workout="flutterkicks">
                   <input type="radio" id="flutterkicks" name="workoutGroup">
                   <label for="flutterkicks" class="fl">flutter kicks</label>
 
@@ -193,7 +202,7 @@
                     <i class="fa fa-play-circle"></i>
                   </a>
                 </li>
-                <li>
+                <li data-workout="legraises">
                   <input type="radio" id="legraises" name="workoutGroup">
                   <label for="legraises" class="fl">leg raises</label>
 
@@ -202,6 +211,12 @@
                   <a class="fr" href="https://youtu.be/Pr1ieGZ5atk" data-lity>
                     <i class="fa fa-play-circle"></i>
                   </a>
+                </li>
+                <li data-workout="other">
+                  <input type="radio" id="other" name="workoutGroup">
+                  <label for="other" class="fl" contenteditable="true" style="cursor: text;">other</label>
+
+                  <div class="check"></div>
                 </li>
               </ul>
               
@@ -341,6 +356,7 @@
     <script src="libraries/sweetalert2/sweetalert2.all.min.js"></script>
     <script src="libraries/shortcut/shortcut.js"></script>
     <script src="libraries/lity/lity.js"></script>
+    <script src="libraries/awesomplete/awesomplete.min.js"></script>
     <script src="js/jquery.scrollintoview.js"></script>
     <script src="libraries/html2canvas/html2canvas.js"></script>
     <script src="js/script.js"></script>

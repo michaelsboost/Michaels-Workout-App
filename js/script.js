@@ -743,6 +743,50 @@ function doBounce(element, times, distance, speed) {
   }        
 }
 
+// datalist for search box
+var dataWorkout = $("[data-workout]");
+var str = "";
+for (var i = 0; i < dataWorkout.length; i++) {
+  var workout = dataWorkout[i].getAttribute("data-workout").toLowerCase();
+
+  workout = workout.split(' ')
+    .map(w => w[0].toUpperCase() + w.substr(1).toLowerCase())
+    .join(' ');
+  str += ", " + workout;
+  $("#search").attr("data-list", str);
+}
+str = $("#search").attr("data-list");
+str = str.substr(2, str.length);
+$("#search").attr("data-list", str);
+var input = document.getElementById("search");
+var comboplete = new Awesomplete(input, {list: "#search"});
+Awesomplete.$('#search').addEventListener("keyup", function(e) {
+  if (search.value) {
+    if (e.which === 13) {
+      comboplete.close();
+    }
+  } else {
+    comboplete.close();
+  }
+});
+
+// handles workout searchbox
+search.onkeyup = function() {
+  str = this.value.toLowerCase();
+  $("[data-workout]").hide();
+
+  for (var i = 0; i < dataWorkout.length; i++) {
+    if (dataWorkout[i].getAttribute("data-workout").toLowerCase().indexOf(str) >= 0) {
+      dataWorkout[i].style.display = "block";
+    }
+  }
+  
+  if (!this.value) {
+    $("[data-workout]").show();
+  }
+};
+
+
 // Auto open how to video
 //$("[data-display=typeofworkout] a:first").trigger("click");
 

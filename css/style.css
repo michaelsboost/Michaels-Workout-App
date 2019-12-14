@@ -253,3 +253,6 @@ html, body {
 .awesomplete {
   display: block;
 }
+.awesomplete .visually-hidden {
+  display: none;
+}
